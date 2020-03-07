@@ -90,7 +90,8 @@ def calc_dp(n,k):
             arr[i][j]=arr[i-1][j]+arr[i-1][j-1]
 return arr[n][k]
 \end{minted}
-complexity analysis: When we traverse the array and visit arr[i][j], we actually perform the add operation $\binom{i}{j}=\binom{i-1}{j}+\binom{i-1}{j-1}$. So the operation cost O($\log\binom{i}{j}$) time. Using the Stirling Formula, we can estimate
-$\log\binom{i}{j}=(i+1/2)\log i-(i-j+1/2)\log (i-j)-(j+1/2)\log j =$ O($i$). The number of nodes we visit is O($k*(2n-k)/2$)=O($kn$). Since we will only visit arr[i][j] once, we can estimate the total complexity as below: the upper bound is $O(kn*n))$=(O$kn^2$), the lower bound is $\Omega(kn)$. The algorithm is efficient, because there is no redundant calculation.
+complexity analysis:
+
+ When we traverse the array and visit \texttt{arr[i][j]}, we actually perform the add operation $\binom{i}{j}=\binom{i-1}{j}+\binom{i-1}{j-1}$. So the operation cost O($\log\binom{i}{j}$) time. Using the Stirling Formula, we can estimate $\log\binom{i}{j}\approx(i+\frac{1}{2})\log i-(i-j+\frac{1}{2})\log (i-j)-(j+\frac{1}{2})\log j =$ O($i$). The number of nodes we visit is O($k*(2n-k)/2$)=O($kn$). Since we will only visit \texttt{arr[i][j]} once, we can estimate the total complexity as below: the upper bound is $O(kn*n)$=$O(kn^2)$, the lower bound is $\Omega(kn)$. The algorithm is efficient, because there is no redundant calculation.
 \end{document}
 

@@ -88,7 +88,7 @@ Let the bit size of $x_i$ be $t_i$, then $t_0=n, t_1=k$,
 using the result of Exercise 1 we can find that the total operation number is: 
 \begin{align}
 O(t_1(t_0-t_1))+O(t_2(t_1-t_2))+\dots + O(t_m(t_{m-1}-t_m)) &\leq\sum_{i=1}^m t_i t_{i-1}-\sum_{i=1}^m t_i^2\\
-&<\sum_{i=1}^m t_i^2 -\sum_{i=1}^m t_i^2\\
+&<\sum_{i=0}^{m-1} t_i^2 -\sum_{i=1}^m t_i^2\\
 &=t_0^2=n^2
 \end{align}
 So we can see the operation number of Euclid algorithm is $O(n^2)$
