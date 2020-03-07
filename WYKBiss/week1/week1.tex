@@ -51,7 +51,7 @@
 \begin{document}
 \maketitle
 
-\begin{thm}{Exercise 21.}{}
+\begin{thm}{Exercise 21. Number Guessing}{}
 A person writes two distinct integers on two cards, one per card,
 and puts them on the table face down. Pick either of the two, look at it, and then guess
 whether the other number is larger or smaller. Suppose that you have a good random number
@@ -59,34 +59,36 @@ generator. Prove that you have a strategy to make a correct guess with probabili
 greater than $\frac{1}{2}$.
 \end{thm}
 
-Let the two distinct integers on cards be $p, q \in \mathbb{Z} $.
+\begin{proof}[Proof]
+    Let the two distinct integers on cards be $p, q \in \mathbb{Z} $.
 
-The strategy exists if we can generate a random number on $\mathbb{Z} $. Let this random number be $n$.
-Our strategy is as follow: If $n > p$, we make the guess that the other number is greater.
+    The strategy exists if we can generate a random number on $\mathbb{Z} $. Let this random number be $n$.
+    Our strategy is as follow: If $n > p$, we make the guess that the other number is greater.
 
-Suppose $p < q$, there will be six situations:
+    Suppose $p < q$, there will be six situations:
 
-\begin{table}[h!]
-    \centering
-    \begin{tabular}{lll}
-        Seen number   & $p$     & $q$     \\
-        $n < p$         & Wrong   & Correct \\
-        $p < n < q$ & Correct & Correct \\
-        $q < n$     & Correct & Wrong
-    \end{tabular}
-\end{table}
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{lll}
+            Seen number   & $p$     & $q$     \\
+            $n < p$         & Wrong   & Correct \\
+            $p < n < q$ & Correct & Correct \\
+            $q < n$     & Correct & Wrong
+        \end{tabular}
+    \end{table}
 
-And we have the same probability to see $p$ and $q$. Thus the probability to guess correctly is
-$$p = \frac{1}{2} + \frac{P(p < n < q)}{2}$$
+    And we have the same probability to see $p$ and $q$. Thus the probability to guess correctly is
+    $$p = \frac{1}{2} + \frac{P(p < n < q)}{2}$$
 
-, which is strictly greater that $\frac{1}{2}$.
+    , which is strictly greater that $\frac{1}{2}$.
 
-For example, if we can get a random angle $\theta \in [0,2\pi)$, and generate by $n = \cot \frac{\theta}{2}$. Then $$p = \frac{1}{2} + \frac{\cot^{-1} q - \cot^{-1} p}{2\pi}.$$
+    For example, if we can get a random angle $\theta \in [0,2\pi)$, and generate by $n = \cot \frac{\theta}{2}$. Then $$p = \frac{1}{2} + \frac{\cot^{-1} q - \cot^{-1} p}{2\pi}.$$
 
-And if we only have a coin, we can toss it for $k$ times to generate a random angle $k \in [0, 2\pi]$ by
-$k = \frac{\text{ integer represented by the sequence }}{2^k} \cdot 2\pi$. Then apply the procedure above.
+    And if we only have a coin, we can toss it for $k$ times to generate a random angle $k \in [0, 2\pi]$ by
+    $k = \frac{\text{ integer represented by the sequence }}{2^k} \cdot 2\pi$. Then apply the procedure above.
+\end{proof}
 
-\begin{thm}{Exercise 22.}{}
+\begin{thm}{Exercise 22. Countable Discontinuous Point}{}
 	 Let $f$ be a monotone function on $\mathbb{R}$ and let $A$ be the set of real numbers $x$ at which $f$ is discontinuous. Show that $|A| \le |\mathbb{N}|$
 \end{thm}
 
@@ -94,7 +96,7 @@ $k = \frac{\text{ integer represented by the sequence }}{2^k} \cdot 2\pi$. Then 
 	Without loss of generality, assume $f$ increases monotonically. Then for any $x \in A$, there should be $ f_+(x) > f_-(x)$. Because $f$ is increasing, for any $x_1 < x_2$, $ f_+(x_1) < f_-(x_2)$. Then we can construct a set $E=\{(f_-(x),f_+(x)) | x\in A\}$, whose elements are intervals that do not intersect with each other. Obviously, $|E|=|A|$. Due to the density of rational numbers, there are infinite rational numbers in each interval. Using the axiom of choice, we can bind each interval with a rational number in the interval, which forms a injection from $E$ to $\mathbb{Q}$. So $|A|=|E|\le|\mathbb{Q}|=|\mathbb{N}|$.
 \end{proof}
 
-\begin{thm}{Exercise 24.}{}
+\begin{thm}{Exercise 24. Chain \& Antichain}{}
    A chain in $2^\mathbb{N} $ is a subset of $2^\mathbb{N} $ of which any two elements are comparable. An antichain in $2^\mathbb{N} $ is a subset of $2^\mathbb{N} $ of which any two elements are incomparable. Can there be a chain whose length is $|2^\mathbb{N} |$? Can there be an antichain whose size is $|2^\mathbb{N} |$? 
 \end{thm}
 1. chain:
@@ -123,7 +125,7 @@ $$f(A)=\{\text{if $A$ contains $2i$, $i$ is in the set, otherwise(contains $2i+1
 It is apparently that $f$ is a bijection between $\mathfrak A$ and $2^{\mathbb N}$.
 
 
-\begin{thm}{Exercise 26.}{}
+\begin{thm}{Exercise 26. Liar Paradox}{}
     We came across two islanders A and B on Crete Island. "All Cretans are liars.", A said. "I'm lying", B said. Which statement is a paradox?
 \end{thm}
 
