@@ -63,19 +63,19 @@
 \begin{algorithm}
 	\caption{Caluculate Binomial Coefficient Using DP}
 	\begin{algorithmic}
-		\STATE Create a 2-dimension array $G$
+		\STATE Create a 2-dimension array $arr$
 		\FOR{$i=0$ to $n$}
-		\STATE $G[i][0]=1$
+		\STATE $arr[i][0]=1$
 		\ENDFOR
 		\FOR{$i=0$ to $k$}
-		\STATE $G[i][i]=1$
+		\STATE $arr[i][i]=1$
 		\ENDFOR
 		\FOR{$i=1$ to $n$}
 		\FOR{$j=1$ to min($i-1$,$k$)}
-		\STATE $G[i][j]=G[i-1][j]+G[i-1][j-1]$
+		\STATE $arr[i][j]=arr[i-1][j]+arr[i-1][j-1]$
 		\ENDFOR
 		\ENDFOR
-		\RETURN $G[n][k]$
+		\RETURN $arr[n][k]$
 	\end{algorithmic}
 \end{algorithm}
 \begin{minted}{Python}
