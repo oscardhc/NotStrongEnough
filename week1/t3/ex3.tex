@@ -1,0 +1,96 @@
+\documentclass[UTF8, a4paper, linespread=1.5]{article}
+
+\usepackage{tcolorbox, listings, algorithm, minted, algorithmic}
+\usepackage{geometry, savesym, amsmath, enumerate, indentfirst, color, amsthm, bm, extarrows, ulem}
+\usepackage{amssymb}
+\usepackage{nameref, hyperref}
+ % \geometry{top=3cm, bottom=3cm, left=1.5cm, right=1.5cm}
+
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+% \usepackage{adjustbox}
+
+\renewcommand\contentsname{Contents}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+% \setlength{\leftskip}{10pt}
+\setlength{\parindent}{10pt}
+% \setlength{\parskip}{2em}
+\renewcommand{\baselinestretch}{1.3}
+
+\newcounter{RomanNumber}
+\newcommand{\mrm}[1]{(\setcounter{RomanNumber}{#1}\Roman{RomanNumber})}
+
+\newtcbtheorem{thm}{}
+  {enhanced, theorem name and number, code={\edef\@currentlabelname{#2}}, 
+  frame code={
+        % \path[thick, draw] (frame.north west) -| (frame.north east) -| (frame.south east) -| (frame.south west) -| (frame.north west);
+        \path[thick, draw] (frame.north west)  +(.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.north east) +(-.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.south west) +(.5\baselineskip,0) -| +(0,.5\baselineskip);
+        \path[thick, draw] (frame.south east) +(-.5\baselineskip,0) -| +(0,.5\baselineskip);
+    },
+    left=1mm, right=1mm, top=1mm, bottom=1mm,
+    colback=black!5,
+    colframe=red!75!black,
+    colbacktitle=black!0,
+    coltitle=black!100,
+    fonttitle=\bfseries}{thm}
+
+
+\usepackage{xparse}
+\NewDocumentEnvironment{qte}{m}{\begin{tcolorbox}[breakable, leftrule=2mm, rightrule=-0.1mm, toprule=-0.1mm, bottomrule=-0.1mm, arc=0mm, colframe=black!30!white, colback=white, coltext=white!50!black]}{\\\rightline{#1}\end{tcolorbox}}
+
+\title{Combinatorics and Graph Theory}
+\date{\today}
+\author{Not Strong Enough}
+
+\begin{document}
+\maketitle
+
+\begin{thm}{A Recursive Algorithm for the Binomial Coefficient}{}
+   Using pseudocode, write a recursive algorithm computing
+  ${n \choose k}$. Implement it in python! What is 
+  the running time of your algorithm, in terms of $n$ and $k$? Would you say it is an efficient
+  algorithm? Why or why not?
+\end{thm}
+
+\begin{algorithm}
+    \caption{Binom\_BF: A Recursive Algorithm for the Binomial Coefficient.}
+	\begin{algorithmic}
+        \IF{$k=0$ or $k=n$}
+        \RETURN $1$
+        \ELSE
+        \RETURN $Binom\_BF(n-1, k-1) + Binom\_BF(n-1, k)$
+        \ENDIF
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{minted}{Python}
+def binom_BF(n, k):
+    if k==0 or k==n:
+        return 1
+    else:
+        return binom_BF(n-1, k-1) + binom_BF(n-1, k)
+\end{minted}
+
+In order to count the number of operations in the recursive algorithm to calculate $\displaystyle \binom n k$. We shall take a look at how the values are calculated. While recursively calculating Fibonacci number $F_n$ can be represented by a tree, we can show this process by a grid graph. A value $\displaystyle \binom n k$, in grid $(n, k)$, is obtained by $(n-1, k-1)$ and $(n-1, k)$. This indicates that there are edges from $(n-1, k-1)$ and $(n-1, k)$ to $(n, k)$.
+
+The recursive algorithm actually tries all possible paths to $(n, k)$, starting at $(i, j)$ where $j = 0$ or $j = i$. That is to say, the time that value is merged as $\displaystyle \binom i j = \binom {i-1}{j-1} + \binom {i-1} j$, is the number of paths going through $(i, j)$, which, by the definition of binomial coefficients, is $\displaystyle \binom {n-i}{k-j}$.
+
+Considering the complexity of integer addition $O(\log \text{ bitsize})$, we can get the running time of the recursive algorithm: $$\sum_{i=0}^n\sum_{j=1}^{i-1} \binom {n-i}{k-j} \log  \binom i j < \sum_{i=0}^n\sum_{j=1}^{i-1} \binom {n-i}{k-j} \log  \binom n {\left\lfloor \frac{n}{2} \right\rfloor }.$$
+
+Using the Stirling Formula, we have
+$$O( \log \binom i j) = O((i+\frac{1}{2})\log i-(i-j+\frac{1}{2})\log (i-j)-(j+\frac{1}{2})\log j) = O(i).$$
+
+The upper bound is
+$$O(\sum_{i=0}^n\sum_{j=1}^{i-1} \binom {n-i}{k-j} \log  \binom n {\left\lfloor \frac{n}{2} \right\rfloor }) = O(n \binom n k).$$
+
+And the lower bound is
+$$\Omega(\binom nk).$$
+
+\end{document}
+
