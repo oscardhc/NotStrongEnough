@@ -1,0 +1,96 @@
+	\documentclass[UTF8, a4paper, linespread=1.5]{article}
+
+\usepackage{tcolorbox, listings}
+\usepackage{geometry, savesym, amsmath, enumerate, indentfirst, color, amsthm, bm, extarrows, ulem}
+\usepackage{amssymb}
+\usepackage{nameref, hyperref}
+ % \geometry{top=3cm, bottom=3cm, left=1.5cm, right=1.5cm}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{minted}
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+% \usepackage{adjustbox}
+
+\renewcommand\contentsname{Contents}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+% \setlength{\leftskip}{10pt}
+\setlength{\parindent}{10pt}
+% \setlength{\parskip}{2em}
+\renewcommand{\baselinestretch}{1.3}
+
+\newcounter{RomanNumber}
+\newcommand{\mrm}[1]{(\setcounter{RomanNumber}{#1}\Roman{RomanNumber})}
+
+\newtcbtheorem[]{thm}{}
+  {enhanced, theorem name and number, code={\edef\@currentlabelname{#2}}, 
+  frame code={
+        % \path[thick, draw] (frame.north west) -| (frame.north east) -| (frame.south east) -| (frame.south west) -| (frame.north west);
+        \path[thick, draw] (frame.north west)  +(.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.north east) +(-.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.south west) +(.5\baselineskip,0) -| +(0,.5\baselineskip);
+        \path[thick, draw] (frame.south east) +(-.5\baselineskip,0) -| +(0,.5\baselineskip);
+    },
+    left=1mm, right=1mm, top=1mm, bottom=1mm,
+    colback=black!5,
+    colframe=red!75!black,
+    colbacktitle=black!0,
+    coltitle=black!100,
+    fonttitle=\bfseries}{thm}
+
+
+\usepackage{xparse}
+\NewDocumentEnvironment{qte}{m}{\begin{tcolorbox}[breakable, leftrule=2mm, rightrule=-0.1mm, toprule=-0.1mm, bottomrule=-0.1mm, arc=0mm, colframe=black!30!white, colback=white, coltext=white!50!black]}{\\\rightline{#1}\end{tcolorbox}}
+
+\title{Algorithm Design and Analysis}
+\date{\today}
+\author{Not Strong Enough}
+
+\begin{document}
+\maketitle
+
+\section{Homework}
+\begin{thm}{Problem 4}{}
+	[A Dynamic Programming Algorithm for the Binomial Coefficient] Using pseudocode, 
+	write a dynamic programming algorithm computing  $\binom{n}{k}$.  Implement it in python!  What is it running 
+	time in terms of $n$ and $k$? Would you say your algorithm is efficient?  Why or why not?
+	
+\end{thm}
+\begin{algorithm}
+	\caption{Caluculate Binomial Coefficient Using DP}
+	\begin{algorithmic}
+		\STATE Create a 2-dimension array $G$
+		\FOR{$i=0$ to $n$}
+		\STATE $G[i][0]=1$
+		\ENDFOR
+		\FOR{$i=0$ to $k$}
+		\STATE $G[i][i]=1$
+		\ENDFOR
+		\FOR{$i=1$ to $n$}
+		\FOR{$j=1$ to min($i-1$,$k$)}
+		\STATE $G[i][j]=G[i-1][j]+G[i-1][j-1]$
+		\ENDFOR
+		\ENDFOR
+		\RETURN $G[n][k]$
+	\end{algorithmic}
+\end{algorithm}
+\begin{minted}{Python}
+def calc_dp(n,k):
+    arr = [[0 for i in range(k+1)] for j in range(n+1)]
+    for i in range(n+1):
+        arr[i][0]=1
+    for i in range(k+1):
+        arr[i][i]=1
+    for i in range(1,n+1):
+        for j in range(1,min(i-1,k)+1):
+            arr[i][j]=arr[i-1][j]+arr[i-1][j-1]
+return arr[n][k]
+\end{minted}
+complexity analysis: When we traverse the array and visit arr[i][j], we actually perform the add operation $\binom{i}{j}=\binom{i-1}{j}+\binom{i-1}{j-1}$. So the operation cost O($\log\binom{i}{j}$) time. Using the Stirling Formula, we can estimate
+$\log\binom{i}{j}=(i+1/2)\log i-(i-j+1/2)\log (i-j)-(j+1/2)\log j =$ O($i$). The number of nodes we visit is O($k*(2n-k)/2$)=O($kn$). Since we will only visit arr[i][j] once, we can estimate the total complexity as below: the upper bound is $O(kn*n))$=(O$kn^2$), the lower bound is $\Omega(kn)$. The algorithm is efficient, because there is no redundant calculation.
+\end{document}
+
