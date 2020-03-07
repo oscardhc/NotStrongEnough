@@ -1,0 +1,77 @@
+\documentclass[UTF8, a4paper, linespread=1.5]{article}
+
+\usepackage{tcolorbox, listings}
+\usepackage{geometry, savesym, amsmath, enumerate, indentfirst, color, amsthm, bm, extarrows, ulem}
+\usepackage{amssymb}
+\usepackage{nameref, hyperref}
+ % \geometry{top=3cm, bottom=3cm, left=1.5cm, right=1.5cm}
+
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+% \usepackage{adjustbox}
+
+\renewcommand\contentsname{Contents}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+% \setlength{\leftskip}{10pt}
+\setlength{\parindent}{10pt}
+% \setlength{\parskip}{2em}
+\renewcommand{\baselinestretch}{1.3}
+
+\newcounter{RomanNumber}
+\newcommand{\mrm}[1]{(\setcounter{RomanNumber}{#1}\Roman{RomanNumber})}
+
+\newtcbtheorem[number within=subsection]{thm}{}
+  {enhanced, theorem name and number, code={\edef\@currentlabelname{#2}}, 
+  frame code={
+        % \path[thick, draw] (frame.north west) -| (frame.north east) -| (frame.south east) -| (frame.south west) -| (frame.north west);
+        \path[thick, draw] (frame.north west)  +(.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.north east) +(-.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.south west) +(.5\baselineskip,0) -| +(0,.5\baselineskip);
+        \path[thick, draw] (frame.south east) +(-.5\baselineskip,0) -| +(0,.5\baselineskip);
+    },
+    left=1mm, right=1mm, top=1mm, bottom=1mm,
+    colback=black!5,
+    colframe=red!75!black,
+    colbacktitle=black!0,
+    coltitle=black!100,
+    fonttitle=\bfseries}{thm}
+
+
+\usepackage{xparse}
+\NewDocumentEnvironment{qte}{m}{\begin{tcolorbox}[breakable, leftrule=2mm, rightrule=-0.1mm, toprule=-0.1mm, bottomrule=-0.1mm, arc=0mm, colframe=black!30!white, colback=white, coltext=white!50!black]}{\\\rightline{#1}\end{tcolorbox}}
+
+\title{Algorithm Design and Analysis}
+\date{\today}
+\author{Not Strong Enough}
+
+\begin{document}
+\maketitle
+
+\section{Bit Complexity of Euclid Algorithm}
+
+\begin{thm}{Exersise 6.}{}
+    Remember the ``period'' algorithm for computing $F'_n := (F_n \mod k)$ discussed in class: (1) find some $i,j$ between $0$ and $k^2$ for which $F'_{i} =  F'_{j}$ and $F'_{i+1} = F'_{j+1}$. Then for $d := j-i$ the sequence $F'_{n}$ will repeat every $d$ steps, as there will be a cycle. This cycle can either be a ``true cycle'' or a ``lasso''. Show that a lasso cannot happen. That is, show that the smallest $i$ for which this happens is $0$.
+\end{thm}
+
+\begin{proof}
+    We prove it by contradiction.
+    
+    Let $i_0 > 0$ be the smallest $i$ for which this happen, i.e, for some $j > 0$ we have: for $\forall p \geqslant i_0 > 0, F'_{p + j} = F'_p$. Since for $p \geqslant 1$, the fibonacci numbers are defined as $F_{p + 1} = F_{p} + F_{p - 1}$, we have $F'_{p + 1} = (F'_p + F'_{p - 1}) \mod k$. It follows that $F'_{p - 1} = (F'_{p + 1} - F'_p + k) \mod k$.
+    
+    Because $F'_{i_0} = F'_{i_0 + j}, F'_{i_0 + 1} = F'_{i_0 + 1 + j}$, we have
+    \begin{align*}
+        F'_{i_0 - 1} &= (F'_{i_0 + 1} - F'_{i_0} + k) \mod k \\
+        &= (F'_{i_0 + 1 + j} - F'_{i_0 + j} + k) \mod k \\
+        &= F'_{i_0 - 1 + j}
+    \end{align*}
+    , which is contradict with out hypothesis.
+    
+    Thus, $i_0$ isn't the smallest $i$, and we can conclude that the smallest $i$ is $0$.
+\end{proof}
+
+\end{document}
+
