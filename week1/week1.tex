@@ -204,6 +204,11 @@ Furthermore, we can introduce a new algorithm to compute this problem(See Algori
 \begin{algorithm}
 	\caption{calculateFactor2}
 	\begin{algorithmic}
+		\REQUIRE 
+		the number i to be calculated 
+		\IF {$i==0$}
+		\RETURN 0
+		\ENDIF
 		\STATE $cnt=0$
 		\WHILE {the lowest bit in $i$ is 0}
 		\STATE $i=i>>1$
