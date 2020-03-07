@@ -1,0 +1,95 @@
+\documentclass[UTF8, a4paper, linespread=1.5]{article}
+
+\usepackage{tcolorbox, listings}
+\usepackage{geometry, amsmath, enumerate, indentfirst, color, amsthm, bm, extarrows, ulem}
+\usepackage{amssymb}
+\usepackage{nameref, hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+ % \geometry{top=3cm, bottom=3cm, left=1.5cm, right=1.5cm}
+
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+% \usepackage{adjustbox}
+
+\renewcommand\contentsname{Contents}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+% \setlength{\leftskip}{10pt}
+\setlength{\parindent}{10pt}
+% \setlength{\parskip}{2em}
+\renewcommand{\baselinestretch}{1.3}
+
+\newcounter{RomanNumber}
+\newcommand{\mrm}[1]{(\setcounter{RomanNumber}{#1}\Roman{RomanNumber})}
+
+\newtcbtheorem[number within=subsection]{thm}{}
+  {enhanced, theorem name and number, code={\edef\@currentlabelname{#2}}, 
+  frame code={
+        % \path[thick, draw] (frame.north west) -| (frame.north east) -| (frame.south east) -| (frame.south west) -| (frame.north west);
+        \path[thick, draw] (frame.north west)  +(.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.north east) +(-.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.south west) +(.5\baselineskip,0) -| +(0,.5\baselineskip);
+        \path[thick, draw] (frame.south east) +(-.5\baselineskip,0) -| +(0,.5\baselineskip);
+    },
+    left=1mm, right=1mm, top=1mm, bottom=1mm,
+    colback=black!5,
+    colframe=red!75!black,
+    colbacktitle=black!0,
+    coltitle=black!100,
+    fonttitle=\bfseries}{thm}
+
+
+\usepackage{xparse}
+\NewDocumentEnvironment{qte}{m}{\begin{tcolorbox}[breakable, leftrule=2mm, rightrule=-0.1mm, toprule=-0.1mm, bottomrule=-0.1mm, arc=0mm, colframe=black!30!white, colback=white, coltext=white!50!black]}{\\\rightline{#1}\end{tcolorbox}}
+
+\title{Algorithm Analysis}
+\date{\today}
+\author{Not Strong Enough}
+
+\begin{document}
+\maketitle
+
+\section{Bit Complexity of Euclid Algorithm}
+
+\subsection{Exercise 1}
+
+{\bfseries prove the more precise bound of the school method}
+
+Assume $a$ has $n$ bits and $b$ has $k$ bits($k < n$), in the school method of division, 
+calculate in rounds. 
+
+In each round, extend $b$ by filling zeros into lower bits and make $b$ have same bit size as $a$. 
+If the extended $b$ is smaller than $a$, let $a$ minus $b$. 
+
+It is obvious that the first bit of $b$ is 1, so each minus will decrease the bit size of $a$. 
+Besides, since the minus is made only when the extended $b$ is smaller than the current value of $a$, 
+if the bit size of $a$ is smaller than $k$, the calculation will end. 
+So there are at most $n-k$ rounds. 
+
+Now consider the minus. Since the lower bits of extended $b$ are 0, only the first $k$ bits of extended $b$ 
+costs. So each minus has $k$ operations. 
+
+In all, there are at most $(n-k)*k$ operations, so the complexity is $O(k(n-k))$. 
+
+\subsection{Exercise 2}
+
+{\bfseries prove the complexity of Euclid algorithm is $O(n^2)$}
+
+In each round, the Euclid algorithm calculates $a\%b$(assume $a\geq b$) which is less than $b$. 
+If the result is not 0, it uses the result with b to do the new round. So we can assume that, in each round, 
+the two calculated numbers are: 
+$$(x_0, x_1), (x_1, x_2)\dots (x_{m-1}, x_m)$$
+Where $x_0>x_1>\dots x_m, x_{m-1}\%x_m=0$. 
+Let the bit size of $x_i$ be $t_i$, then $t_0=n, t_1=k$, 
+using the result of Exercise 1 we can find that the total operation number is: 
+\begin{align}
+O(t_1(t_0-t_1))+O(t_2(t_1-t_2))+\dots + O(t_m(t_{m-1}-t_m)) &\leq\sum_{i=1}^m t_i t_{i-1}-\sum_{i=1}^m t_i^2\\
+&<\sum_{i=1}^m t_i^2 -\sum_{i=1}^m t_i^2\\
+&=t_0^2=n^2
+\end{align}
+So we can see the operation number of Euclid algorithm is $O(n^2)$
+\end{document}
