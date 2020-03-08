@@ -173,6 +173,26 @@ return arr[n][k]
 Complexity analysis:
 
  When we traverse the array and visit \texttt{arr[i][j]}, we actually perform the add operation $\binom{i}{j}=\binom{i-1}{j}+\binom{i-1}{j-1}$. So the operation costs O($\log\binom{i}{j}$) time. Using the Stirling Formula, we can estimate $\log\binom{i}{j}\approx(i+\frac{1}{2})\log i-(i-j+\frac{1}{2})\log (i-j)-(j+\frac{1}{2})\log j =$ O($i$). The number of nodes we visit is O($k\cdot (2n-k)/2$)=O($kn$). Since we will only visit \texttt{arr[i][j]} once, we can estimate the total complexity as below: the upper bound is $O(kn\cdot n)$=$O(kn^2)$, the lower bound is $\Omega(kn)$. The algorithm is efficient, because there is no redundant calculation.
+
+Also, we can get the upper bound of the running time in another way:
+\begin{align*}
+    \sum_{i=0}^n \sum_{j=0}^{\min(i, k)} \log \binom ij &= (\sum_{i=0}^k\sum_{j=0}^i + \sum_{i=k+1}^n\sum_{j=0}^k) \log \binom ij \\
+.\end{align*}
+
+We have
+\begin{align*}
+    \sum_{i=0}^k\sum_{j=0} \binom ij &= \sum_{i=0}^k\sum_{j=0}^i i\log i - j \log j - (i-j)\log(i-j) \\
+                                     &= \sum_{i=0}^k i^2\log i + (\frac{i^2}{4}-\frac{i^2}{2}\log i) + (\frac{i^2}{4}-\frac{i^2}{2}\log i) \\
+                                     &= O(k^3)
+.\end{align*}
+
+And
+\begin{align*}
+    \sum_{i=k}^n\sum_{j=0}^k i\log i - j \log j - (i-j)\log(i-j) &= \sum_{i=k}^n ki\log i - (\frac{k^2}{2}\log k - \frac{k^2}{4}) - (\frac{i^2}{2}\log i - \frac{i^2}{4}) + \frac{(i-k)^2}{2}\log(i-k)-\frac{(i-k)^2}{4} \\
+                                                                 &= O(nk^2\log n)
+.\end{align*}
+
+Thus the running time is $O(nk^2\log n)$.
  
  \newpage
  \begin{thm}{Binomial Coefficient modulo 2}{}
