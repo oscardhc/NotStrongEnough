@@ -206,47 +206,27 @@ The running time is the same as Problem 4. It's not efficient, because it cannot
 
 Furthermore, we can introduce a new algorithm to compute this problem(See Algorithm 3).
 \begin{algorithm}
-	\caption{Caluculate Binomial Coefficient Modulo 2}
+	\caption{Binom\_Mod2(n,k) : Caluculate Binomial Coefficient Modulo 2}
 	\begin{algorithmic}
-		\STATE $factor$ = an empty array
-		\FOR{$i=0$ to $n$}
-		\STATE $factor[i]= calculateFactor2(i)$
-		\ENDFOR
-		\FOR{$i=1$ to $n$}
-		\STATE $factor[i]= factor[i]+factor[i-1]$
-		\ENDFOR
-		\STATE $factorLeft=factor[n]-factor[n-k]-factor[k]$
-		\IF{ $factorLeft>0$}
+		\IF {$n<k$}
 		\RETURN $0$
-		\ELSE 
+		\ENDIF
+		\IF {$n<2$ and $k<2$}
 		\RETURN $1$
 		\ENDIF
-	\end{algorithmic}
-\end{algorithm}
-\begin{algorithm}
-	\caption{calculateFactor2}
-	\begin{algorithmic}
-		\REQUIRE 
-		the number i to be calculated 
-		\IF {$i==0$}
-		\RETURN 0
-		\ENDIF
-		\STATE $cnt=0$
-		\WHILE {the lowest bit in $i$ is 0}
-		\STATE $i=i>>1$
-		\STATE $cnt=cnt+1$
-		\ENDWHILE
-		\RETURN $cnt$
+		\RETURN Binom\_Mod2$(n \% 2,k\%2)$*Binom\_Mod2$(n/2,k/2)$
 	\end{algorithmic}
 \end{algorithm}
 
-The main idea is to calculate the number of factor 2 in $\binom{n}{k}$, equivalently, calculating the number of factor 2 in $ n!$, $(n-k)!$ and $k!$, based on the fact that $\binom{n}{k} = \frac{n!}{(n-k)!\cdot k!}$. 
 
-The calculateFactor2(i) function is $O(\log i)$. The addition of \texttt{factor[i]} and \texttt{factor[i-1]} is also  $O(\log i)$, because \texttt{factor[i]} represents the number of factor 2 in $i!$, which is $O(i)$. So the total complexity should be:
-\begin{align}
-	O(\sum_{i=1}^{n}\log i)=O(\log(n!))=O(n\log n)
-\end{align}
+The main idea is to use Lucas Theorem:
+\begin{align*}
+	&\binom{m}{n} \equiv  \prod_{i=0}^k \binom{m_i}{n_i}\pmod p \\
+	m&=m_k p^k + m_{k-1} p^{k-1}+ \cdots +m_1 p +m_0 \\
+	n&=n_k p^k + n_{k-1} p^{k-1}+ \cdots +n_1 p +n_0
+\end{align*}
 
+In the algorithm, Binom\_Mod2$(n\%2,k\%2)$ costs $O(1)$ time and will not recurse further. Binom\_Mod2$(n/2,k/2)$ reduce n and k by half in each recursion, so it will recurse $O(\log n)$ times. We can conclude that the total complexity is $O(\log n)$.
 \newpage
 \begin{thm}{}{}
     Remember the ``period'' algorithm for computing $F'_n := (F_n \mod k)$ discussed in class: (1) find some $i,j$ between $0$ and $k^2$ for which $F'_{i} =  F'_{j}$ and $F'_{i+1} = F'_{j+1}$. Then for $d := j-i$ the sequence $F'_{n}$ will repeat every $d$ steps, as there will be a cycle. This cycle can either be a ``true cycle'' or a ``lasso''. Show that a lasso cannot happen. That is, show that the smallest $i$ for which this happens is $0$.
