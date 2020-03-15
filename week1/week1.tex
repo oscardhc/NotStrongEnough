@@ -180,7 +180,7 @@ Complexity analysis:
 
 Also, we can get the upper bound of the running time in another way:
 \begin{align*}
-    O(\sum_{i=0}^n \sum_{j=0}^{\min(i, k)} \log \binom ij) &= O((\sum_{i=0}^k\sum_{j=0}^i + \sum_{i=k+1}^n\sum_{j=0}^k) \log \binom ij)
+    \sum_{i=0}^n \sum_{j=0}^{\min(i, k)} \log \binom ij &= (\sum_{i=0}^k\sum_{j=0}^i + \sum_{i=k+1}^n\sum_{j=0}^k) \log \binom ij
 .\end{align*}
 
 We have
