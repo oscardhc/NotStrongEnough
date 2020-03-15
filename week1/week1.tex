@@ -192,7 +192,7 @@ We have
 
 And
 \begin{align*}
-    \sum_{i=k}^n\sum_{j=0}^k (i\log i - j \log j - (i-j)\log(i-j)) &= \sum_{i=k}^n (ki\log i - (\frac{k^2}{2}\log k - \frac{k^2}{4}) \\
+    \sum_{i=k+1}^n\sum_{j=0}^k \binom ij &= \sum_{i=k}^n (ki\log i - (\frac{k^2}{2}\log k - \frac{k^2}{4}) \\
                                                                  &\quad \quad \quad - (\frac{i^2}{2}\log i - \frac{i^2}{4}) + \frac{(i-k)^2}{2}\log(i-k)-\frac{(i-k)^2}{4}) + o(nk^2\log n) \\
                                                                  &= O(nk^2\log n)
 .\end{align*}
