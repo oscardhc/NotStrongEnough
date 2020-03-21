@@ -1,0 +1,76 @@
+\documentclass[UTF8, a4paper, linespread=1.5]{article}
+
+\usepackage{tcolorbox, listings, algorithm, minted, algorithmic}
+\usepackage{geometry, savesym, amsmath, enumerate, indentfirst, color, amsthm, bm, extarrows, ulem}
+\usepackage{amssymb}
+\usepackage{nameref, hyperref}
+ \geometry{top=3cm, bottom=3cm, left=1.5cm, right=1.5cm}
+
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+% \usepackage{adjustbox}
+
+\renewcommand\contentsname{Contents}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+% \setlength{\leftskip}{10pt}
+\setlength{\parindent}{10pt}
+% \setlength{\parskip}{2em}
+\renewcommand{\baselinestretch}{1.3}
+
+\newcounter{RomanNumber}
+\newcommand{\mrm}[1]{(\setcounter{RomanNumber}{#1}\Roman{RomanNumber})}
+
+\newtcbtheorem{thm}{}
+  {enhanced, theorem name and number, code={\edef\@currentlabelname{#2}}, 
+  frame code={
+        % \path[thick, draw] (frame.north west) -| (frame.north east) -| (frame.south east) -| (frame.south west) -| (frame.north west);
+        \path[thick, draw] (frame.north west)  +(.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.north east) +(-.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.south west) +(.5\baselineskip,0) -| +(0,.5\baselineskip);
+        \path[thick, draw] (frame.south east) +(-.5\baselineskip,0) -| +(0,.5\baselineskip);
+    },
+    left=1mm, right=1mm, top=1mm, bottom=1mm,
+    colback=black!5,
+    colframe=red!75!black,
+    colbacktitle=black!0,
+    coltitle=black!100,
+    fonttitle=\bfseries}{thm}
+
+
+\usepackage{xparse}
+\NewDocumentEnvironment{qte}{m}{\begin{tcolorbox}[breakable, leftrule=2mm, rightrule=-0.1mm, toprule=-0.1mm, bottomrule=-0.1mm, arc=0mm, colframe=black!30!white, colback=white, coltext=white!50!black]}{\\\rightline{#1}\end{tcolorbox}}
+
+\title{CS217 -- Algorithm Design and Analysis \\ Homework 1}
+\date{\today}
+\author{Not Strong Enough}
+
+\begin{document}
+\maketitle
+
+\begin{thm}{}{}
+    Given an array $A$ of $n$ items (numbers), we can find the maximum with $n - 1$ comparisons (this is simple). Show that this is optimal: that is, any algorithm that does $n - 2$ or fewer comparisons will fail to find the maximum on some inputs.
+\end{thm}
+\begin{proof}
+    Consider that the process of finding the maximum forms a "comparision tree". Now we explain how the "comparison tree" is formed:
+    
+    \begin{enumerate}
+        \item At the beginning, each item of $A$ is regarded as a node, and all nodes are separated. Each node has a value, from $A[0]$ to $A[n - 1]$.
+        \item Each time we pick two nodes $a$ and $b$ such that both $a$ and $b$ have \textbf{no parent} in the tree.
+        \item Then we make a comparison between the values of $a$ and $b$, and get the larger one. 
+        \item We add a new node as the parent of both $a$ and $b$. The value of the new node is set to the larger value of $a$ and $b$.
+        \item Repeat step 2 to step 4. Stop when there is only one node which has no parent, i.e., all nodes constitute a tree. Finally the value of the root is the maximum, which is what we want.
+    \end{enumerate}
+    
+    From the process, we know that only the origin $n$ nodes are leaves of the tree. And it is clear that every internal node, i.e., node that is not a leaf, has exactly two children, since the internal node is added after comparing its two children.
+    
+    It is known that such kind of trees (whose internal nodes have exactly two children) have exactly $2n - 1$ nodes: $n$ leaves and $n - 1$ internal nodes. So at least $n - 1$ comparisons are needed. Otherwise we will get more than one tree in the end, and thus we can't determine the maximum.
+\end{proof}
+
+\newpage
+
+\end{document}
+
