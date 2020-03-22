@@ -1,0 +1,40 @@
+\input{../template.tex}
+
+\begin{document}
+\maketitle
+
+\begin{thm}{}{}
+    Let $B_{i,j,k}$ be an indicator variable which is 1 if $i$ is a common ancestor of  $j$ and $k$ appear in the subtree $T(\pi)$ rooted at $i$.
+    What is $\mathbb{E}[B_{i,j,k}]$? Give a succinct formula for this.
+\end{thm}
+
+\begin{proof}[Solution]
+  	Suppose we are at node whose pivot is $p$. If $p< min(i,j,k)$ or $p>max(i,j,k)$, then $i,j,k$ are all in the left subtree or all in the right subtree, which means we have to check the subtree.
+  	If $min(i,j,k)\le p \le max(i,j,k)$, we have to discuss some cases.
+  	
+  	case 1.if $p=i$, then $B_{i,j,k}=1$ because $i$ is the ancestor of $j$ and $k$, leading to $B_{i,j,k}=1$.
+  	
+  	case 2.if case 1 isn't satisfied and $p\ne j$ and $p\ne k$, then $i,j,k$ are not in the same subtree. So $B_{i,j,k}=0$.
+  	
+  	case 3.if case 1 and 2 isn't satisfied , then $j$ or $k$ is the ancestor of $i$, so $B_{i,j,k}=0$.
+  	
+  	In conclusion,$\mathbb{E}[B_{i,j,k}]=\frac{1}{max(i,j,k)-min(i,j,k)+1}$
+\end{proof}
+
+
+
+\begin{thm}
+	Let $C(\pi,k)$ be the number of comparisons made by QUICKSELECT	when given $\pi$ as input. Design a formula for $C(\pi,k)$ with the help of the indicator variables $A_{i,j}$ and $B_{i,j,k}$ (analogous to the formula $\sum_{i\ne j}A_{i,j}$) for the number of comparisons made by quicksort).
+	
+\end{thm}
+
+\begin{proof}[Solution]
+	Observe that 2 number $i,j$ will be compared if and only if $j\ne i$ and $j$ and $k$ are in the subtree of $i$.
+	
+	So $C(\pi,k)=\sum_{i\ne j}B_{i,j,k}$.
+\end{proof}
+
+
+
+\end{document}
+
