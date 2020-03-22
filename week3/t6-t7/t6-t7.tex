@@ -12,7 +12,7 @@
   	Suppose we are at node whose pivot is $p$. If $p< min(i,j,k)$ or $p>max(i,j,k)$, then $i,j,k$ are all in the left subtree or all in the right subtree, which means we have to check the subtree.
   	If $min(i,j,k)\le p \le max(i,j,k)$, we have to discuss some cases.
   	
-  	case 1.if $p=i$, then $B_{i,j,k}=1$ because $i$ is the ancestor of $j$ and $k$, leading to $B_{i,j,k}=1$.
+  	case 1.if $p=i$, then $B_{i,j,k}=1$ because $i$ is the ancestor of $j$ and $k$.
   	
   	case 2.if case 1 isn't satisfied and $p\ne j$ and $p\ne k$, then $i,j,k$ are not in the same subtree. So $B_{i,j,k}=0$.
   	
