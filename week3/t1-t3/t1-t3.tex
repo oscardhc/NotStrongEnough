@@ -63,7 +63,7 @@ Here is the pseudocode of the algorithm above.
             \State $minimum \gets A[0]$
         \EndIf
         
-        \For{$i \gets 1$ to $n - 1$}
+        \For{$i \gets 1$ to $(n - 1)$}
             \If{$A[2i] > A[2i + 1]$}
                 \State $maximum \gets \max\{maximum, A[2i]\}$
                 \State $minimum \gets \min\{minimum, A[2i + 1]\}$
@@ -72,8 +72,7 @@ Here is the pseudocode of the algorithm above.
                 \State $minimum \gets \min\{minimum, A[2i]\}$
             \EndIf
         \EndFor
-        
-        \Return $maximum, minimum$
+        \\\ \ \ \ \Return $maximum, minimum$
         \EndFunction
     \end{algorithmic}
 \end{algorithm}
@@ -91,11 +90,52 @@ Here is the pseudocode of the algorithm above.
     
     Consider maximum of the whole array. During the process above, the maximum was compared to exactly $\log_2(n)$ element, since there are $\log_2(n) + 1$ levels in the "comparison tree" and in each level except the top one, the maximum was compared to another element.
     
-    Among the $\log_2(n)$ elements which were compared to the maximum, there must be the second largest element of the whole array. Otherwise assume the second largest element is $x'$, and there is no comparison between the largest and the second largest element $x'$. According to the second explanation of exercise 1, we may also regard $x'$ as the maximum since we didn't even find an element which is larger than or equal to $x'$!
+    Among the $\log_2(n)$ elements which were compared to the maximum, there must be the second largest element of the whole array. Otherwise assume the second largest element is $x'$, and there is no direct comparison between the largest and the second largest element $x'$. Then either $x'$ is not the second largest at all if there exists some "indirect comparison" between $x'$ and the maximum, or according to the second explanation of exercise 1, we may also regard $x'$ as the maximum since we didn't even find an element which is larger than or equal to $x'$!
     
     So we just need to collect the $\log_2(n)$ elements which were compared to the maximum(this is not difficult because we can record down the elements compared to each element in each level of the "comparison tree"). Then we use $\log_2(n) - 1$ comparisons to find the maximum among the $\log_2(n)$ elements. What we get in the end is the second largest element of the whole array.
     
     Therefore, the total number of comparisons is $(n - 1) + (\log_2(n) - 1) = n + \log_2(n) - 2$, which is less than the required number $n + \log_2(n)$.
 \end{proof}
+
+We also offer a pseudocode of this algorithm.
+\begin{algorithm}
+    \caption{Find the second largest element with at most $n + \log_2(n)$ comparisons.}
+    \begin{algorithmic}
+        \Ensure $n = 2^k$
+        \Function{FindMaximumIndex}{$A$, $left$, $right$}
+            \If{$left + 1 = right$}
+            
+                \ \ \ \Return $left, [\ ]$
+            \EndIf
+            
+            \State $mid \gets (left + right) / 2$
+            \State $max_L, list_L \gets$ \Call{FindMaximumIndex}{$A$, $left$, $mid$}
+            \State $max_R, list_R \gets$ \Call{FindMaximumIndex}{$A$, $mid$, $right$}
+            
+            \If{$A[max_L] > A[max_R]$}
+                \State append $max_R$ to $list_L$
+                
+                \ \ \ \Return $max_L, list_L$
+            \Else
+                \State append $max_L$ to $list_R$
+                
+                \ \ \ \Return $max_R, list_R$
+            \EndIf
+        \EndFunction
+        
+        \\
+        \Function{FindSecondLargestElement}{$A$, $n$}
+            \State $max, list \gets$ \Call{FindMaximumIndex}{$A$, $0$, $n$}
+            \State $k \gets \log_2(n)$
+            \State $secondLargest \gets A[list[0]]$
+            \For{$i \gets 1$ to $(k - 1)$}
+                \If{$A[list[i]] > secondLargest$}
+                    \State $secondLargest \gets A[list[i]]$
+                \EndIf
+            \EndFor
+            \\\ \ \ \ \Return $secondLargest$
+        \EndFunction
+    \end{algorithmic}
+\end{algorithm}
 \end{document}
 
