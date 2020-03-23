@@ -9,27 +9,27 @@
 \end{thm}
 
 \begin{proof}[Solution]
-  	Suppose we are at node whose pivot is $p$. If $p< min(i,j,k)$ or $p>max(i,j,k)$, then $i,j,k$ are all in the left subtree or all in the right subtree, which means we have to check the subtree.
-  	If $min(i,j,k)\le p \le max(i,j,k)$, we have to discuss some cases.
+  	Suppose we are at the node whose pivot is $p$. If $p > \max\{i,j,k\}$ or $p < \min\{i,j,k\}$, then $i,j,k$ are all in the left subtree or all in the right subtree, which means we have to check one of the subtrees.
+      
+    If $\min\{i,j,k\} \leqslant p \leqslant \max\{i,j,k\}$, we have to discuss some cases:
+    \begin{enumerate}
+        \item If $p=i$, then $B_{i,j,k}=1$ because $i$ is the ancestor of $j$ and $k$.
+        \item If case 1 isn't satisfied and $p\ne j$ and $p\ne k$, then $i,j,k$ are not in the same subtree. So $B_{i,j,k}=0$.
+        \item If case 1 and 2 isn't satisfied, then $j$ or $k$ is the ancestor of $i$. So $B_{i,j,k}=0$.
+    \end{enumerate}
   	
-  	case 1.if $p=i$, then $B_{i,j,k}=1$ because $i$ is the ancestor of $j$ and $k$.
-  	
-  	case 2.if case 1 isn't satisfied and $p\ne j$ and $p\ne k$, then $i,j,k$ are not in the same subtree. So $B_{i,j,k}=0$.
-  	
-  	case 3.if case 1 and 2 isn't satisfied , then $j$ or $k$ is the ancestor of $i$, so $B_{i,j,k}=0$.
-  	
-  	In conclusion,$\mathbb{E}[B_{i,j,k}]=\frac{1}{max(i,j,k)-min(i,j,k)+1}$
+  	In conclusion, $\mathbb{E}[B_{i,j,k}]=\frac{1}{\max\{i,j,k\}-\min\{i,j,k\}+1}$.
 \end{proof}
 
-
+\newpage
 
 \begin{thm}{}{}
-	Let $C(\pi,k)$ be the number of comparisons made by QUICKSELECT	when given $\pi$ as input. Design a formula for $C(\pi,k)$ with the help of the indicator variables $A_{i,j}$ and $B_{i,j,k}$ (analogous to the formula $\sum_{i\ne j}A_{i,j}$) for the number of comparisons made by quicksort).
+	Let $C(\pi,k)$ be the number of comparisons made by \textsc{QuickSelect} when given $\pi$ as input. Design a formula for $C(\pi,k)$ with the help of the indicator variables $A_{i,j}$ and $B_{i,j,k}$ (analogous to the formula $\sum_{i\ne j}A_{i,j}$) for the number of comparisons made by quicksort).
 	
 \end{thm}
 
 \begin{proof}[Solution]
-	Observe that 2 number $i,j$ will be compared if and only if $j\ne i$ and $j$ and $k$ are in the subtree of $i$.
+	Observe that two numbers $i,j$ will be compared if and only if $j\ne i$ and $j$ and $k$ are in the subtree of $i$.
 	
 	So $C(\pi,k)=\sum_{i\ne j}B_{i,j,k}$.
 \end{proof}
