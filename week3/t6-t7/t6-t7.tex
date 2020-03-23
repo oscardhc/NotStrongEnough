@@ -5,18 +5,20 @@
 
 \begin{thm}{}{}
     Let $B_{i,j,k}$ be an indicator variable which is 1 if $i$ is a common ancestor of  $j$ and $k$ in the quicksort tree. That is, if both $j$ and $k$ appear in the subtree $T(\pi)$ rooted at $i$.
+    
     What is $\mathbb{E}[B_{i,j,k}]$? Give a succinct formula for this.
 \end{thm}
 
 \begin{proof}[Solution]
 	Let's go down through the path that the algorithm visits.
+    
   	Suppose we are at the node whose pivot is $p$. If $p > \max\{i,j,k\}$ or $p < \min\{i,j,k\}$, then $i,j,k$ are all in the left subtree or all in the right subtree, which means we have to check one of the subtrees to determine $B_{i,j,k}$.
       
-    If $\min\{i,j,k\} \leqslant p \leqslant \max\{i,j,k\}$, we can determine $b_{i,j,k}$ without going downwards, but we have to discuss some cases:
+    If $\min\{i,j,k\} \leqslant p \leqslant \max\{i,j,k\}$, we can determine $B_{i,j,k}$ without going downwards, but we have to discuss some cases:
     \begin{enumerate}
         \item If $p=i$, then $B_{i,j,k}=1$ because $i$ is the ancestor of $j$ and $k$.
-        \item If case 1 isn't satisfied and $p\ne j$ and $p\ne k$, then $i,j,k$ are not in the same subtree. So $B_{i,j,k}=0$.
-        \item If case 1 and 2 isn't satisfied, then $j$ or $k$ is the ancestor of $i$. So $B_{i,j,k}=0$.
+        \item If the condition of case 1 doesn't hold and $p\ne j$ and $p\ne k$, then $i,j,k$ are not in the same subtree. So $B_{i,j,k}=0$.
+        \item If the condition of both case 1 and 2 don't hold, then either $j$ or $k$ is the ancestor of $i$. So $B_{i,j,k}=0$.
     \end{enumerate}
   	
   	In conclusion,  $B_{i,j,k}=1$ if and only if $i$ appears first among $[\min\{i,j,k\},\max\{i,j,k\}]$ in the input array. So  $\mathbb{E}[B_{i,j,k}]=\frac{1}{|[\min\{i,j,k\},\max\{i,j,k\}]|}=\frac{1}{\max\{i,j,k\}-\min\{i,j,k\}+1}$.
@@ -26,11 +28,10 @@
 
 \begin{thm}{}{}
 	Let $C(\pi,k)$ be the number of comparisons made by \textsc{QuickSelect} when given $\pi$ as input. Design a formula for $C(\pi,k)$ with the help of the indicator variables $A_{i,j}$ and $B_{i,j,k}$ (analogous to the formula $\sum_{i\ne j}A_{i,j}$) for the number of comparisons made by quicksort).
-	
 \end{thm}
 
 \begin{proof}[Solution]
-	Observe that two numbers $i,j$ will be compared if and only if $j\ne i$ and $j$ and $k$ are in the subtree of $i$. An interpretation is that i will be a pivot if and only if i is on the path from root to node $k$, which is equal to $k$ is in the subtree rooted at $i$. As a pivot, $i$ will be compared to every node in the subtree rooted at $i$.
+	Observe that two numbers $i,j$ will be compared if and only if $j\ne i$ and $j$ and $k$ are in the subtree of $i$. An interpretation is that $i$ will be a pivot if and only if $i$ is on the path from root to node $k$, which is equal to $k$ is in the subtree rooted at $i$. As a pivot, $i$ will be compared to every node in the subtree rooted at $i$.
 	
 	So $C(\pi,k)=\sum_{i\ne j}B_{i,j,k}$.
 \end{proof}
