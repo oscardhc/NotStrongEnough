@@ -27,11 +27,11 @@
         .\end{math}
     \item case $k\leq i<j$:
         \begin{math}
-            \sum_{i=k}^{n-1}\sum_{j=i+1}^{n} B_{i,j,k}&=\sum_{j=k+1}{n}\sum_{i=k}^{j-1} B_{i,j,k}\\
-                                                      &=\sum_{j=k+1}^{n}\frac{j-k+1}*(j-k)\\
+            \sum_{i=k}^{n-1}\sum_{j=i+1}^{n} B_{i,j,k}&=\sum_{j=k+1}^{n}\sum_{i=k}^{j-1} B_{i,j,k}\\
+                                                      &=\sum_{j=k+1}^{n}\frac{j-k}{j-k+1}\\
                                                       &=\sum_{j=k+1}^{n}(1-\frac{1}{j-k+1})\\
-                                                      &=n-(k+1)-(1+\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n-k+1})\\
-                                                      &=n-(k+1)-H_{n-k+1}
+                                                      &=n-k+1-(1+\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n-k+1})\\
+                                                      &=n-k+1-H_{n-k+1}
         .\end{math}
 \end{itemize}
 
@@ -56,9 +56,10 @@
             \sum _{i=1}^{k-1} \sum _{j=k+1}^n \frac{1}{j-i+1} = n \ln n - k \ln k - (n-k) \ln (n-k) + o(n)
         .\end{math}
 
-        Summing three terms up,
+        Summing three terms up, and multiply it by 2(because there are two possible orders between $i$ and $j$),
         \begin{math}
-            \mathbb{E}_\pi[C(\pi,k)] = n - 1 - H_k - H_{n-k+1} + n\ln n - k\ln k - (n-k)\ln (n-k) + o(n)
+            \mathbb{E}_\pi[C(\pi,k)] &= 2(n + n\ln n - k\ln k - (n-k)\ln (n-k)) + o(n) \\
+                                     &= 2(1+\ln \frac{1}{1-\kappa} + \kappa \ln \frac{1-\kappa}{\kappa})n + o(n)
         .\end{math}
 
 \end{itemize}
