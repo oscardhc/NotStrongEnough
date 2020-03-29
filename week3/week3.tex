@@ -154,7 +154,13 @@ We also offer a pseudocode of this algorithm.
     \includegraphics[width=0.6\textwidth]{qselect.pdf}
     \caption{quickselect for the $5^\text{th}$ largest element in $[2,3,6,1,7,5,8,4]$ with gray nodes visited}
 \end{figure}
+\begin{proof}[Solution]
+    As the example above, each round QuickSelect chooses a pivot and divide elements(in the group) into two part by the pivot, which is the same as quicksort. 
+    The pivot of each round in QuickSelect is the same as that in quicksort, as the the pivot of later round is the descendent of that of former round. 
 
+    However, quicksort does this recursively in two divisions until each one has only one element, but QuickSelect only does this recursively in one division, and it ends if the condition is meeted(the $k_{th}$ element is found). 
+    So the QuickSelect executes only part of quicksort. 
+\end{proof}
 \newpage
 \begin{thm}{}{}
     Let $B_{i,j,k}$ be an indicator variable which is 1 if $i$ is a common ancestor of  $j$ and $k$ in the quicksort tree. That is, if both $j$ and $k$ appear in the subtree $T(\pi)$ rooted at $i$.
