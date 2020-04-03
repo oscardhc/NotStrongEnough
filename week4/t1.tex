@@ -1,0 +1,32 @@
+\usepackage{amsfonts}
+
+\input{template.tex}
+
+\begin{document}
+    \maketitle
+
+    \begin{thm}{}{}
+        Let $T$ be a minimum spanning tree of $G$, and let $c\in \mathbb{R}$.
+        Show that $T_c$ and $G_c$ have exactly the same connected components. (That is, two vertices $u,v\in V$ are connected in $T_c$ if and only if they are connected in $G_c$).
+        You are encouraged to draw pictures to illustrate your proof.
+    \end{thm}
+    \begin{proof}[Solution]
+        Since $T_c$ is a subset of $G_c$, if $u,v\in V$ are connected in $T_c$, then $u,v$ are connected in $G_c$.
+        
+        Now let's assume $u,v\in V$ are not connected in $T_c$, but are connected in $G_c$.
+        We call the edge $(u,v)$ $x$, then $w(x)\leq c$.
+        Also, the path in $T$ from $u$ to $v$ contains an edge whose weight is greater than c.
+        We call it $y$, then $w(y)>  c$.
+        If we add $x$ into $T$, this forms a cycle which contains both $x$ and $y$.
+        After that, removing $y$ from $T$ still keeps the connectivity.
+        We name $T'=T+x-y$.
+        Now $T'$ becomes a tree, because it has $|V|-1$ edges and it's connected.
+        The total weight of  $T'$ is $w(T)+w(x)-w(y)<w(T)$, which violates that $T$ is an MST\@.
+        So $u,v$ are not connected in $G_c$ if they are not connected in $T_c$.
+
+        In conclusion, two vertices $u,v\in V$ are connected in $T_c$ if and only if they are connected in $G_c$.
+    \end{proof}
+
+
+\end{document}
+
