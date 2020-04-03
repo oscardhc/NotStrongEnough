@@ -1,0 +1,19 @@
+\input{template.tex}
+
+\begin{document}
+\begin{thm}{}{}
+    Suppose G is connected, and no two edges of G have the same weight. Show that G has exactly one minimum spanning tree
+\end{thm}
+\begin{proof}[Proof]
+    Suppose there are two different minimum spanning trees, named $T$ and $T'$. 
+
+    Now we remove an edge $e$ in $T$, and the graph becomes two connected parts. 
+    If in $T'$ the two parts are connected by $e$ too, 
+    then remove another edge in $T$ until the one in $T'$ is different from the one in $T$. 
+
+    There should be such a pair: otherwise, each edge in $T$ is the same as that in $T'$, which is a contradiction. 
+
+    Now consider such pair. Without loss of generality, assume that $w(e)<w(e')$. 
+    Then if we replace $e'$ in $T'$ by $e$, the total weight of $T'$ is less, so $T'$ is not a minimum spanning tree. 
+\end{proof}
+\end{document}
