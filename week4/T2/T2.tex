@@ -1,0 +1,17 @@
+\input{../template.tex}
+
+\begin{document}
+
+    \begin{thm}{}{}
+        For a weighted graph $G$, let $m_c(G) := | \{e \in E(G) \mid w(e) \leq c\}|$, i.e., the number of edges of weight at most $c$ (so $G_c$ has $m_c(G)$ edges). Let $T$, $T'$ be two minimum spanning trees of G. Show that $m_c(T) = m_c(T')$.
+    \end{thm}
+
+    \begin{proof}
+        For a graph $G = (V, E)$, from the definition of $m_c(G)$ we have $m_c(G) = | \{e \in E(G) \mid w(e) \leq c\} | = |E(G_c)|$. Since $T$ and $T'$ are two minimum spanning trees of $G$, by the conclusion of exersice 1, we know that $T_c$ and $G_c$ have exactly the same connected components, and $T'_c$ and $G_c$ also have the same connected components. It follows that $T_c$ and $T'_c$ have the same connected components.
+        
+        Note that $T_c$ and $T'_c$ are two \textit{forests}. We know that for a forest with $n$ nodes and $k$ connected components, there are exactly $n - k$ edges in the forest. Hence $T_c$ and $T'_c$ having the same connected components means that the number of edges in $T_c$ and $T'_c$ are also the same, i.e., $m_c(T) = m_c(T')$.
+    \end{proof}
+
+
+\end{document}
+
