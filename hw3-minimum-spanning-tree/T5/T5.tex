@@ -17,11 +17,12 @@
 
         \Function{NumberOfMST}{$V$, $E$, $w$}
 
-            \State $W \gets \{w(e_i): e_i \in E\}$
+            \State $W \gets [w(e_i): e_i \in E]$
+            \State sort $W$ so that $i < j \iff w_i < w_j$
             \State $X \gets \varnothing$
             \State $Answer \gets 1$
 
-            \For{$w_i \in W$ in increasing order}
+            \For{$w_i \in W$}
 
                 \State $E_{w_i} \gets \{e_i: w(e_i) = w_i\} $
                 \State $V' \gets$ connected components of $G' = (V, X)$
@@ -42,7 +43,7 @@
     \begin{itemize}
         \item Effectiveness(polynomial-time):
 
-            It is polynomial-time because the for-loop will be executed $O(n)$ times, and every statement in the loop can be done in polynomial time.
+            It is polynomial-time because the for-loop will be executed $O(|E|)$ times, and every statement in the loop can be done in polynomial time.
 
         \item Correctness:
 
