@@ -24,7 +24,7 @@
                         \For{$i=1$ to $2^{d}$} \Comment{Loop 2}
                         
                             \State Let $S_1, S_2, \ldots, S_k$ denote the edge sets in $divisions$ in order, i.e., representing $divisions$ as $[S_1, \ldots, S_k]$.
-                            \State Use median-of-medians algorithm $k$ times to find the median capacity of the capacities of the edges in each set. Denote them as $m_1, m_2, \ldots, m_k$ respectively. (If there are two, choose the larger one.)
+                            \State Use median-of-medians algorithm $k$ times to find the median capacity of the capacities of the edges in each set(if there are two medians, choose the larger one). Denote them as $m_1, m_2, \ldots, m_k$ respectively.
                             %\State $m_{1},\cdots,m_{k}\gets$ the median of $S_1,\cdots,S_k$ in means of weight
                             
                             \State $newDivisions \gets [\ ]$ \Comment Let $newDivisions$ be an empty list.
@@ -81,10 +81,10 @@
         Suppose $|C_{old}|\cdot 2^{d_{old}}=O(m)$.
         We have $|C_{new}|=O(|C_{old}|\cdot (\frac{1}{2})^{2^{d_{old}}})$,
         $d_{new}=d_{old}+2^{d_{old}}$.
-        So  $|C_{new}|\cdot 2^{d_{new}}=O(m)$
+        So  $|C_{new}|\cdot 2^{d_{new}}=O(m)$.
 
         Now we know that a single iteration of ``Loop 1'' takes time $O(m)$.
-        Note that $2^{d}<m$.
+        Note that $2^{d}\leqslant m$.
         Since $d$ increases exponentially, ``Loop 1'' will iterate $O(\log^*m)$ times.
         Finally, we get the running time is $O(m\log^*m)$.
         Obviously this algorithm has a better running time than $O(m\log\log m),O(m\log\log\log m),O(m\log\log\log\log m)$ when $m$ is sufficiently large.
