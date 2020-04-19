@@ -1,0 +1,100 @@
+%! Author = jinho
+%! Date = 4/19/2020
+
+\input{template.tex}
+
+% Document
+\begin{document}
+    \begin{thm}{}{}
+        Give an algorithm for MCP of running time $O(m\log\log m)$.
+    \end{thm}
+    \begin{proof}[Solution]
+        \ 
+        
+        \begin{algorithm}
+            \caption{An algorithm for MCP problem.}
+            \begin{algorithmic}
+                %\Require edges $e_1,\ldots,e_m$
+                \Function{MCP}{$V, E = \{e_1, e_2, \ldots, e_m\}, c$}
+                    \State $C\gets \{e_1,\ldots,e_m\}$
+                    \State $oldEdges \gets \emptyset$
+                    \State $d\gets 0$
+                    \While{there are multiple capacities of the edges in $C$} \Comment{Loop 1}
+                        \State $divisions\gets [C]$ \Comment Let $divisions$ be a list only containing the set $C$.
+                        \For{$i=1$ to $2^{d}$} \Comment{Loop 2}
+                        
+                            \State Let $S_1, S_2, \ldots, S_k$ denote the edge sets in $divisions$ in order, i.e., representing $divisions$ as $[S_1, \ldots, S_k]$.
+                            \State Use median-of-medians algorithm $k$ times to find the median capacity of the capacities of the edges in each set. Denote them as $m_1, m_2, \ldots, m_k$ respectively. (If there are two, choose the larger one.)
+                            %\State $m_{1},\cdots,m_{k}\gets$ the median of $S_1,\cdots,S_k$ in means of weight
+                            
+                            \State $newDivisions \gets [\ ]$ \Comment Let $newDivisions$ be an empty list.
+                            \For{$j = 1$ to $k$} \Comment{Loop 3}
+                            \State Append $\{s\in S_{j}:c(s) \geqslant m_{j}\}$ to $newDivisions$.
+                            \State Append $\{s\in S_{j}:c(s) < m_{j}\}$ to $newDivisions$.
+                            %\State $divisions\gets \bigcup\limits_{j=1}^{k} \{s\in S_{j}:c(s)<=m_{j}\}\cup \{s\in S_{j}:c(s)>m_{j}\}$
+                            \EndFor
+                            \State $divisions \gets newDivisions$
+                        \EndFor
+                        \State $C, oldEdges\gets$ \Call{GetDivision}{$divisions$, $oldEdges$} %$GetDivision(divisions)$.
+                    \State $d\gets 2^{d}+d$
+                    \EndWhile
+                    \State \Return the capacity of the edges in $C$
+                \EndFunction
+                
+                \bigskip
+                
+                \Function{GetDivision}{$divisions$, $oldEdges$} \Comment Using the algorithm of exercise 1.
+                    \State $G\gets (V, oldEdges)$
+                    
+                    \For {$div$ in $divisions$ in the order of the list} %(iterate from higher capacity to lower capacity)
+                        \State Add all edges in $div$ to $G$.
+                        \If{$t$ is now reachable from $s$}%\If{$G$ is s-t-connected}
+                            \State \Return $div$, $oldEdges$
+                        \Else
+                            \State $oldEdges \gets oldEdges \cup div$
+                        \EndIf
+                    \EndFor
+                \EndFunction
+            \end{algorithmic}
+        \end{algorithm}
+    
+        {\bf The pseudocode of the algorithm is in the next page.}
+    
+        The correctness of the algorithm comes from below.
+        First, we initialize our $c^*$ candidates to be all capacities of the edges in $G$.
+        Then, in each iteration, we divide it into many divisions of approximately the same size in order, and test which division $c^*$ is in.
+        Finally, there will be only one candidate left, and the only candidate is $c^*$.
+
+        Now we'll analyze the running time.
+        Note that using median-of-medians algorithm to find the median of a set $S$ has running time $O(|S|)$.
+        In ``Loop 2'' of function \textsc{MCP}, we find the median of $S_1,\ldots,S_k$ in $2^d$ iterations.
+        Note that there is an invariant equation $\sum_{i=1}^{k}|S_k|=|C|$.
+        So finding the median requires $O(|C|\cdot 2^{d})$ in total.
+        The \textsc{GetDivision} function may need to add all the edges into the graph in the worst case.
+        Testing the connectivity will use $O(m)$ time in total if we record a set of reachable vertices as decribed in Exercise 1.
+        So the running time of \textsc{GetDivision} is $O(m)$.
+
+        %Observe that $|C|\cdot 2^{d}=O(m)$.
+        We now prove that $|C|\cdot 2^{d}=O(m)$ by induction.
+        Initially, $|C|=m$ and $d=0$.
+        It obviously holds.
+        Suppose $|C_{old}|\cdot 2^{d_{old}}=O(m)$.
+        We have $|C_{new}|=O(|C_{old}|\cdot (\frac{1}{2})^{2^{d_{old}}})$,
+        $d_{new}=d_{old}+2^{d_{old}}$.
+        So  $|C_{new}|\cdot 2^{d_{new}}=O(m)$
+
+        Now we know that a single iteration of ``Loop 1'' takes time $O(m)$.
+        Note that $2^{d}<m$.
+        Since $d$ increases exponentially, ``Loop 1'' will iterate $O(\log^*m)$ times.
+        Finally, we get the running time is $O(m\log^*m)$.
+        Obviously this algorithm has a better running time than $O(m\log\log m),O(m\log\log\log m),O(m\log\log\log\log m)$ when $m$ is sufficiently large.
+    \end{proof}
+
+    \begin{thm}{}{}
+        Give an algorithm for MCP that runs in $O(m\log\log\log m)$? How about $O(m\log\log\log\log m)$?
+        How far can you get?
+    \end{thm}
+    \begin{proof}[Solution]
+        See Problem 2.
+    \end{proof}
+\end{document}
