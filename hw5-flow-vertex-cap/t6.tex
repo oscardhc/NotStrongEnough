@@ -1,0 +1,29 @@
+%! Author = jinho
+%! Date = 5/6/2020
+\input{template.tex}
+
+
+% Document
+\begin{document}
+    \maketitle
+    \begin{thm}{}{}
+        Let $v(G)$ denote the size of a maximum matching of $G=(V,E)$.
+        Show that a bipartite graph $G$ has at most $2^{v(G)}$ mimimum vertex covers.
+    \end{thm}
+    \begin{proof}
+        From the Konig's Theorem, we know that the size of mimimum vertex cover is $v(G)$.
+        Let $C$ be a minimum vertex cover.
+        Then we can construct new minimum vertex cover by choosing vertices from $C$ and $V\setminus C$.
+        In other words, all minimum vertex covers can be represented by $X\cup Y, X\subseteq C,Y\subseteq V\setminus C$.
+        Denote $N(A)=\{b|\exists a\in A, \text{there is an edge between a and b}\}$.
+        For all $X\subseteq C$, to construct a vertex cover, $Y$ must touch all edges touched by $C\setminus X$ but not by $X$.
+        \begin{itemize}
+            \item If $N(C\setminus X)\cap (C\setminus X)\ne \emptyset$, there does not exist such a $Y$.
+            \item  If $N(C\setminus X)\cap (C\setminus X)= \emptyset$, then $Y$ must be at least $N(C\setminus X) \cap (V\setminus C)$ to be a vertex cover.
+            To make $X\cap Y$ a minimum vertex cover, $Y$ has to be $N(C\setminus X) \cap (V\setminus C)$.
+        \end{itemize}
+
+        Since $X$ has $2^{v(G)}$ choices, $G$ has at most $2^{v(G)}$ mimimum vertex covers.
+    \end{proof}
+
+\end{document}
