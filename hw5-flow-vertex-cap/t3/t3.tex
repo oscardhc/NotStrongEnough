@@ -1,0 +1,34 @@
+\input{../template.tex}
+
+\begin{document}
+
+\begin{thm}{}{}
+    Prove Menger’s Theorem. You have to prove two things: first, not both cases above can occur (this is rather easy); second, one of them must occur (this requires a tool from the lecture).
+\end{thm}
+\begin{proof}[Proof]
+    Let $V(G) = \{v_1, \cdots \}$ and $s = v_p, t = v_q$. 
+
+    We would like to construct a flow network $(V', s', t', c)$ where $V' = \{v_1, v_1', v_2, v_2', \cdots \}$ and
+    $$c(u, v) = \begin{cases}
+        1, \text{ if } \exists i, (u, v) = (v_i, v_i') \\
+        \infty, \text{ if } \exists i, j, (u, v) = (v_i', v_j) \wedge (v_i, v_j) \in E \\
+        0, \text{ otherwise }
+    \end{cases}.$$
+
+    And finally let $s' = v_p', t' = v_q$. Then:
+
+    \begin{itemize}
+        \item There are $k$ vertex disjoint paths $p_1, \cdots ,p_k$ in $G$ iff there is a flow $f$ in $(V', s', t', c)$ with $\text{val}(f) = k$, iff $\max \text{val}(f) \ge k$.
+        \item There are $k-1$ vertices $v_{i_1}, \cdots ,v_{i{k-1}}$ in $V \setminus \{s, t\} $ such that $G - \{v_{i_1},\cdots , v_{i_{k-1}}\} $ contains no $s-t$ path iff there is a cut $S$ in $(V', s', t', c)$ with $\text{cap}(S) = k-1$ by making $v_{i_j} \in S$ and $v_{i_j}' \not\in S$ for all $j$, iff $\min \text{cap}(S) < k$.
+    \end{itemize}
+
+    By \textit{Max-Flow Min-Cut Theorem}, let $\max \text{val}(f) = \min \text{cap}(S) = l$. Then:
+    \begin{itemize}
+        \item Either $l \ge k$, resulting in $1$ holds while $2$ does not.
+        \item Or $l < k$, resulting in $2$ holds while $1$ does not.
+    \end{itemize}
+
+    Therefore, \textit{exactly one} of the two statements is true.
+\end{proof}
+
+\end{document}
