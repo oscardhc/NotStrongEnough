@@ -68,10 +68,10 @@
     \begin{proof}
         Construct the flow in following steps: 
 
-        1. Split each vertex $v$ in $\bigcup_{i\leq k\leq n-i}L_k$ into two, $v_in$ and $v_out$, there is $(v_in,v_out)$ with capacity $1$ in the flow. 
+        1. Split each vertex $v$ in $\bigcup_{i\leq k\leq n-i}L_k$ into two, $v_{in}$ and $v_{out}$, there is $(v_{in},v_{out})$ with capacity $1$ in the flow. 
         If there is an edge $(u,v)$ in $H_n$, then there is an edge $(u_out, v_in)$ with capacity $\infty$ in the flow. 
 
-        2. set a new point $s$ connected to $v_{i,in}$ for each $v_i\in L_i$ in the flow, the capacity is $1$. 
+        2. Set a new point $s$ connected to $v_{i,in}$ for each $v_i\in L_i$ in the flow, the capacity is $1$. 
         Symmetrically, for each $v_{n-i}\in L_{n-i}$, there is an edge $(v_{n-i,out},t)$ with capacity $1$ in the flow. 
 
         Then there is a flow that, for edges from $s$ or end to $t$ the flow takes $1$; for edges in form of 
@@ -82,11 +82,11 @@
         And the total flow is $\binom{n}{i}$. Besides, it is the maxflow since the flow out of $s$ is no more than $\binom{n}{i}$. 
 
         So there also exists a integer max flow $F$ whose size is $\binom{n}{i}$. 
-        Since in the flow network, the capacity of $(v_in,v_out)$ for each $v$ is $1$, each path in the flow network is disjoint. 
-        (Otherwise, the flow in for some vertex $v_in$ is greater than $1$). 
+        Since in the flow network, the capacity of $(v_{in},v_{out})$ for each $v$ is $1$, each path in the flow network is disjoint. 
+        (Otherwise, the flow in for some vertex $v_{in}$ is greater than $1$). 
         The capacity of each path is $1$, so there are $\binom{n}{i}$ paths. 
 
-        Combine $v_in$ and $v_out$ together and remove $s,t$, these $\binom{n}{i}$ paths turns to be disjoint paths from $L_i$ to $L_{n-i}$. 
+        Combine $v_in$ and $v_out$ together and remove $s,t$, these $\binom{n}{i}$ paths turns to be disjoint paths from $L_i$ to $L_{n-i}$.
     \end{proof} 
 
     \newpage
