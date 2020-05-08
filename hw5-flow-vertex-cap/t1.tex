@@ -3,13 +3,13 @@
 \begin{document}
 
     \begin{thm}{}{}
-        Let $G = (V, c)$ be a flow network. Prove that flow is ``transitive'' in the following sense: if $r, s, t$ are vertices, and there is an $r-s$-flow of value $k$ and an $s-t$-flow of value $k$, then there is an $r-t$-flow of value $k$.
+        Let $G = (V, c)$ be a flow network. Prove that flow is ``transitive'' in the following sense: if $r, s, t$ are vertices, and there is an $r$-$s$-flow of value $k$ and an $s$-$t$-flow of value $k$, then there is an $r$-$t$-flow of value $k$.
     \end{thm}
 
     \begin{proof}
-        Note that there is an $r-s$-flow of value $k$ means that the value of the maximum $r-s$-flow is at least $k$, which also means that the value of the minimum $r-s$-cut is at least $k$. Similarly, the value of the minimum $s-t$-cut is also at least $k$.
+        Note that there is an $r$-$s$-flow of value $k$ means that the value of the maximum $r$-$s$-flow is at least $k$, which also means that the value of the minimum $r$-$s$-cut is at least $k$. Similarly, the value of the minimum $s$-$t$-cut is also at least $k$.
         
-        Now consider an $r-t$-cut. It is either an $r-s$-cut (if $s$ is not in the cut) or an $s-t$-cut (if $s$ is in the cut). So the capacity of the minimum $r-t$-cut is at least $k$. It follows that the value of the maximum $r-t$-flow is at least $k$, and thus there is an $r-t$-flow of value $k$.
+        Now consider an $r$-$t$-cut. It is either an $r$-$s$-cut (if $s$ is not in the cut) or an $s$-$t$-cut (if $s$ is in the cut). So the capacity of the minimum $r$-$t$-cut is at least $k$. It follows that the value of the maximum $r$-$t$-flow is at least $k$, and thus there is an $r$-$t$-flow of value $k$.
     \end{proof}
 
 
