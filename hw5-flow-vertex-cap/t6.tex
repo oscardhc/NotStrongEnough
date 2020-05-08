@@ -7,11 +7,11 @@
 \begin{document}
     \maketitle
     \begin{thm}{}{}
-        Let $v(G)$ denote the size of a maximum matching of $G=(V,E)$.
-        Show that a bipartite graph $G$ has at most $2^{v(G)}$ mimimum vertex covers.
+        Let $\nu(G)$ denote the size of a maximum matching of $G=(V,E)$.
+        Show that a bipartite graph $G$ has at most $2^{\nu(G)}$ mimimum vertex covers.
     \end{thm}
     \begin{proof}
-        From the Konig's Theorem, we know that the size of mimimum vertex cover is $v(G)$.
+        From the Konig's Theorem, we know that the size of mimimum vertex cover is $\nu(G)$.
         Let $C$ be a minimum vertex cover.
         Then we can construct new minimum vertex cover by choosing vertices from $C$ and $V\setminus C$.
         In other words, all minimum vertex covers can be represented by $X\cup Y, X\subseteq C,Y\subseteq V\setminus C$.
@@ -23,7 +23,7 @@
             To make $X\cap Y$ a minimum vertex cover, $Y$ has to be $N(C\setminus X) \cap (V\setminus C)$.
         \end{itemize}
 
-        Since $X$ has $2^{v(G)}$ choices, $G$ has at most $2^{v(G)}$ mimimum vertex covers.
+        Since $X$ has $2^{\nu(G)}$ choices, $G$ has at most $2^{\nu(G)}$ mimimum vertex covers.
     \end{proof}
 
 \end{document}
