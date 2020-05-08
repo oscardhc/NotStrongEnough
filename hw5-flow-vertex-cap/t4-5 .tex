@@ -27,13 +27,14 @@
         Then there is a flow that, for edges whose capacity is $1$ the flow takes $1$; for the rest edges, 
         each in form of $(u,v), u\in L_k,v\in L_{k+1}$, the flow takes $\frac{\binom{n}{i}}{\binom{n}{k}(n-k)}$. 
 
-        It is obvious that the flow is correct, that the input and output of each vertex is correct. And the total flow is $\binom{n}{i}$. 
-        Besides, it is the maxflow since the flow out of $s$ is no more than $\binom{n}{i}$. 
+        It is obvious that the flow is well-defined, that for each vertex (except for $s,t$) the flow in equals the flow out. 
+        And the total flow is $\binom{n}{i}$. Besides, it is the maxflow since the flow out of $s$ is no more than $\binom{n}{i}$. 
 
         So there exists a min-cut of the graph that the size of the cut is $\binom{n}{i}$ as well. 
         The collection of the end point of each edge in the cut is a vertex cut, 
-        so the size of the minimum vertex cut is $\binom{n}{i}$. By Menger's Theorem, 
-        there are $\binom{n}{i}$ disjoint paths from $s$ to $t$, and they are also disjoint from $L_i$ to $L_{n-i}$ by removing $s$ and $t$. 
+        so the size of the minimum vertex cut is $\binom{n}{i}$. 
+        By Menger's Theorem, there are $\binom{n}{i}$ disjoint paths from $s$ to $t$, 
+        by removing $s$ and $t$ of these paths, we get $\binom{n}{i}$ disjoint paths from $L_i$ to $L_{n-i}$ 
         
     \end{proof} 
 
