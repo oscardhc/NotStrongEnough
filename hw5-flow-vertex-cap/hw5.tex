@@ -1,6 +1,7 @@
 \input{template.tex}
 
 \begin{document}
+    \maketitle
 
     \begin{thm}{Exercise 1}{}
         Let $G = (V, c)$ be a flow network. Prove that flow is ``transitive'' in the following sense: if $r, s, t$ are vertices, and there is an $r$-$s$-flow of value $k$ and an $s$-$t$-flow of value $k$, then there is an $r$-$t$-flow of value $k$.
@@ -11,6 +12,8 @@
         
         Now consider an $r$-$t$-cut. It is either an $r$-$s$-cut (if $s$ is not in the cut) or an $s$-$t$-cut (if $s$ is in the cut). So the capacity of the minimum $r$-$t$-cut is at least $k$. It follows that the value of the maximum $r$-$t$-flow is at least $k$, and thus there is an $r$-$t$-flow of value $k$.
     \end{proof}
+
+    \newpage
 
     \begin{thm}{Exercise 3}{}
         Prove Menger’s Theorem. You have to prove two things: first, not both cases above can occur (this is rather easy); second, one of them must occur (this requires a tool from the lecture).
@@ -41,6 +44,8 @@
         Therefore, \textit{exactly one} of the two statements is true.
     \end{proof}
 
+    \newpage
+
     In the two exercises below, let $\Gamma(X)$ be the neighbors of $X$. 
     \begin{thm}{Exercise 4}{}
         Consider the induced bipartite subgraph $H_n[L_i\cup L_{i+1}]$, show that for $i<n/2$ the graph has a matching of size $|L_i|=\binom{n}{i}$
@@ -54,6 +59,8 @@
 
         So there is $\min_{X\subseteq L_i}(|L_i|-|X|+|\Gamma(X)|)=|L_i|=\binom{n}{i}$. 
     \end{proof} 
+
+    \newpage
 
     \begin{thm}{Exercise 5}{}
         Show that there are $\binom{n}{i}$ paths in $H_n$ starting at $L_i$ ending in $L_{n-i}$ and are disjoint. 
@@ -76,25 +83,29 @@
         
     \end{proof} 
 
+    \newpage
+
     \begin{thm}{Exercise 6}{}
         Let $\nu(G)$ denote the size of a maximum matching of $G=(V,E)$.
         Show that a bipartite graph $G$ has at most $2^{\nu(G)}$ mimimum vertex covers.
     \end{thm}
     \begin{proof}
-        From the Konig's Theorem, we know that the size of mimimum vertex cover is $\nu(G)$.
+        From the K\"{o}nig's Theorem, we know that the size of mimimum vertex cover is $\nu(G)$ if $G$ is a bipartite graph.
         Let $C$ be a minimum vertex cover.
-        Then we can construct new minimum vertex cover by choosing vertices from $C$ and $V\setminus C$.
-        In other words, all minimum vertex covers can be represented by $X\cup Y, X\subseteq C,Y\subseteq V\setminus C$.
-        Denote $N(A)=\{b|\exists a\in A, \text{there is an edge between a and b}\}$.
+        Then we can construct new minimum vertex covers by choosing vertices from $C$ and $V\setminus C$.
+        In other words, all minimum vertex covers can be represented by $X\cup Y$, where $X\subseteq C, Y \subseteq V\setminus C$.
+        Denote $N(A)=\{b \mid \exists a\in A, \text{ there is an edge between } a \text{ and } b \}$.
         For all $X\subseteq C$, to construct a vertex cover, $Y$ must touch all edges touched by $C\setminus X$ but not by $X$.
         \begin{itemize}
             \item If $N(C\setminus X)\cap (C\setminus X)\ne \emptyset$, there does not exist such a $Y$.
             \item  If $N(C\setminus X)\cap (C\setminus X)= \emptyset$, then $Y$ must be at least $N(C\setminus X) \cap (V\setminus C)$ to be a vertex cover.
             To make $X\cap Y$ a minimum vertex cover, $Y$ has to be $N(C\setminus X) \cap (V\setminus C)$.
         \end{itemize}
-
+        
         Since $X$ has $2^{\nu(G)}$ choices, $G$ has at most $2^{\nu(G)}$ mimimum vertex covers.
     \end{proof}
+
+    \newpage
 
     Obviously, this is not true for general (non-bipartite) graphs: the triangle $K_3$ has $\nu(K_3) = 1$ but it has three minimum vertex covers. The five-cycle $C_5$ has $\nu(C_5) = 2$ but has five minimum vertex covers.
 

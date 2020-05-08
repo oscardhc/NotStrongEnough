@@ -11,11 +11,11 @@
         Show that a bipartite graph $G$ has at most $2^{\nu(G)}$ mimimum vertex covers.
     \end{thm}
     \begin{proof}
-        From the Konig's Theorem, we know that the size of mimimum vertex cover is $\nu(G)$.
+        From the K\"{o}nig's Theorem, we know that the size of mimimum vertex cover is $\nu(G)$ if $G$ is a bipartite graph.
         Let $C$ be a minimum vertex cover.
-        Then we can construct new minimum vertex cover by choosing vertices from $C$ and $V\setminus C$.
-        In other words, all minimum vertex covers can be represented by $X\cup Y, X\subseteq C,Y\subseteq V\setminus C$.
-        Denote $N(A)=\{b|\exists a\in A, \text{there is an edge between a and b}\}$.
+        Then we can construct new minimum vertex covers by choosing vertices from $C$ and $V\setminus C$.
+        In other words, all minimum vertex covers can be represented by $X\cup Y$, where $X\subseteq C, Y \subseteq V\setminus C$.
+        Denote $N(A)=\{b \mid \exists a\in A, \text{ there is an edge between } a \text{ and } b \}$.
         For all $X\subseteq C$, to construct a vertex cover, $Y$ must touch all edges touched by $C\setminus X$ but not by $X$.
         \begin{itemize}
             \item If $N(C\setminus X)\cap (C\setminus X)\ne \emptyset$, there does not exist such a $Y$.
