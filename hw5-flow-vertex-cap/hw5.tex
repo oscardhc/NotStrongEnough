@@ -66,21 +66,27 @@
         Show that there are $\binom{n}{i}$ paths in $H_n$ starting at $L_i$ ending in $L_{n-i}$ and are disjoint. 
     \end{thm}
     \begin{proof}
-        We first set a new point $s$ connected to all vertices in $L_i$ and a new point $t$ connected to all vertices in $L_{n-i}$. 
-        
-        Set the capacity of edges starting from $s$ or ending to $t$ be $1$, and the capacity of the rest be $\infty$. 
-        Then there is a flow that, for edges whose capacity is $1$ the flow takes $1$; for the rest edges, 
-        each in form of $(u,v), u\in L_k,v\in L_{k+1}$, the flow takes $\frac{\binom{n}{i}}{\binom{n}{k}(n-k)}$. 
+        Construct the flow in following steps: 
+
+        1. Split each vertex $v$ in $\bigcup_{i\leq k\leq n-i}L_k$ into two, $v_in$ and $v_out$, there is $(v_in,v_out)$ with capacity $1$ in the flow. 
+        If there is an edge $(u,v)$ in $H_n$, then there is an edge $(u_out, v_in)$ with capacity $\infty$ in the flow. 
+
+        2. set a new point $s$ connected to $v_{i,in}$ for each $v_i\in L_i$ in the flow, the capacity is $1$. 
+        Symmetrically, for each $v_{n-i}\in L_{n-i}$, there is an edge $(v_{n-i,out},t)$ with capacity $1$ in the flow. 
+
+        Then there is a flow that, for edges from $s$ or end to $t$ the flow takes $1$; for edges in form of 
+        $(v_{k,out},v_{k+1,in})$, the flow takes $\frac{\binom{n}{i}}{\binom{n}{k}(n-k)}$; 
+        for edges in form of $(v_{k,in},v_{k,out})$, the flow takes $\frac{\binom{n}{i}}{\binom{n}{k}}$. 
 
         It is obvious that the flow is well-defined, that for each vertex (except for $s,t$) the flow in equals the flow out. 
         And the total flow is $\binom{n}{i}$. Besides, it is the maxflow since the flow out of $s$ is no more than $\binom{n}{i}$. 
 
-        So there exists a min-cut of the graph that the size of the cut is $\binom{n}{i}$ as well. 
-        The collection of the end point of each edge in the cut is a vertex cut, 
-        so the size of the minimum vertex cut is $\binom{n}{i}$. 
-        By Menger's Theorem, there are $\binom{n}{i}$ disjoint paths from $s$ to $t$, 
-        by removing $s$ and $t$ of these paths, we get $\binom{n}{i}$ disjoint paths from $L_i$ to $L_{n-i}$ 
-        
+        So there also exists a integer max flow $F$ whose size is $\binom{n}{i}$. 
+        Since in the flow network, the capacity of $(v_in,v_out)$ for each $v$ is $1$, each path in the flow network is disjoint. 
+        (Otherwise, the flow in for some vertex $v_in$ is greater than $1$). 
+        The capacity of each path is $1$, so there are $\binom{n}{i}$ paths. 
+
+        Combine $v_in$ and $v_out$ together and remove $s,t$, these $\binom{n}{i}$ paths turns to be disjoint paths from $L_i$ to $L_{n-i}$. 
     \end{proof} 
 
     \newpage
