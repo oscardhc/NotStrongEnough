@@ -1,0 +1,48 @@
+%! Author = jinho
+%! Date = 5/31/2020
+
+\input{template.tex}
+% Document
+\begin{document}
+    \begin{thm}{}{}
+        Let $v(G)$ denote the size of a maximum matching of $G$.
+        Obviously, $val(MLP(G))\ge v(G)$ for all graphs.
+        Show that $v(G)=val(MLP(G))$ for all bipartite graphs $G$.
+        Do this without referring to Konig's Theorem.
+    \end{thm}
+    \begin{proof}[Solution]
+        Suppose $X$ is a solution to $MLP(G)$.
+        $E_F$ is the set of edges with fractional values in X.
+        First do as follows:
+        \begin{itemize}
+            \item[(1)] If $E_F$ doesn't contain a cycle, terminate.
+            \item[(2)] Find a cycle in $E_F$ with fractional values, denote it $C:=\{e_i\in E_F :1\le i \le n,i\in\mathbb{N}\}$.
+            \item[(3)] Add $x_{e_{2k-1}}$ by $\epsilon$ and $x_{e_{2k}}$ by $-\epsilon$ for $\{k\in \mathbb{N}:k<=n/2\}$.
+            \item[(4)] Increase $\epsilon$ until there exists $i$ such that $x_{e_i}=0 \text{ or } 1$.
+            \item[(5)] go to step(2) if there exists a cycle in $E_F$.
+        \end{itemize}
+        Since $G$ is a bipartite, C can only be a even cycle, so step (3) makes sense.
+        If we modify the solution by step(3) , obviously the constraints of $MLP(G)$ will still be satisfied, and the target function will remain unchanged.
+        The process will terminate because $|E_F|$ decreases by at least 1 in each iteration.
+
+        Then do as follows:
+        \begin{itemize}
+            \item[(1)] If $E_F$ is empty, terminate.
+            \item[(2)] Choose 2 vertex $v_1,v_2$ that $|\{x_e\in(0,1):v_1\in e\}|=1$, $|\{x_e\in(0,1):v_2\in e\}|=1$ and there's a path between $v_1$ and $v_2$ in $E_F$, denote it $P:=\{e_{i}'\in E_F:1\le i \le m,i\in\mathbb{N}\}$
+            \item[(3)] Add $x_{e_{2k-1}'}$ by $\epsilon$ for $\{k\in\mathbb{N}:2k-1\le m\}$ and $x_{e_{2k}'}$ by $-\epsilon$ for $\{k\in\mathbb{N}:2k\le m\}$
+            \item[(4)] Increase $\epsilon$ until there exists $i$ such that $x_{e_{i}'}=0 \text{ or } 1$
+            \item[(5)] Go to step (2) if $E_F$ is not empty
+        \end{itemize}
+        Since there's no cycle in $E_F$, we can definitely choose $v_1,v_2$ that satisfy the requirements if $E_F$ is not empty.
+        In each iteration, the target function will not decrease.
+        Since $v_1,v_2$ can only be touched by edges with fractional value or value 0, the constraints of $v_1,v_2$ can be satisfied.
+        In other words, $\sum_{e\in E:v_1\in e}x_e =x_{e_{1}'} \le 1$, $\sum_{e\in E:v_2\in e}x_e =x_{e_{m}'} \le 1$
+        The constraints of other vertices $v$ in $P$ will obviously be maintained.
+        The process will termintate because $|E_F|$ decreases by at least 1 in each iteration.
+
+        Finally, after 2 processes, the solution becomes integral and the value of target function does not decrease, which means $\text{int-val}(MLP(G))\ge val(MLP(G))$.
+        However we have  $\text{int-val}(MLP(G))\le val(MLP(G))$.
+        So $v(G)=\text{int-val}(MLP(G))= val(MLP(G))$
+    \end{proof}
+
+\end{document}
