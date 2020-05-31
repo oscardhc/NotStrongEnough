@@ -1,0 +1,19 @@
+\input{template.tex}
+
+\begin{document}
+
+    \begin{thm}{}{}
+        We know that $\nu(G) = \tau(G)$ for all bipartite graphs (K\H{o}nig's Theorem) and $\nu(G) \leq \tau(G)$ for all graphs (since every matched edge must be covered by a distinct vertex). Show that $\tau(G) \leq 2\nu(G)$ for all grpahs $G$.
+    \end{thm}
+
+    \begin{proof}
+        Let $M$ be a maximum matching of $G$. It follows that $|M| = \nu(G)$. Now we choose our vertex set $V'$ to be all the matched vertices in $G$. So $|V'| = 2\nu(G)$. 
+        
+        Claim that $V'$ is a vertex cover. To see that, assume there exists an edge $(u, v)$ which is not covered by $V'$. It means that neither $u$ nor $v$ is matched. So we can add edge $(u, v)$ to $M$, and thus $M$ is not maximum, which leads to a contradiction.
+        
+        So the size of minimum vertex cover $\tau(G) \leq |V'| = 2\nu(G)$.
+    \end{proof}
+
+
+\end{document}
+
