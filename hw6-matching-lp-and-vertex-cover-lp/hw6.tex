@@ -118,103 +118,55 @@
             Now consider the maximum matching and MLP. Obviously we can only match $2$ pairs of vertices. So $\nu(K_4) = 2$, and $\nu_f(K_4) \geq 2$ follows. Since we already know that $\tau_f(K_4) \leq 2$ and $\nu_f(K_4) = \tau_f(K_4)$ by Strong LP Duality, we can conclude that $\nu(K_4) = \nu_f(K_4) = \tau_f(K_4) = 2$. Therefore $K_4$ is MLP exact.
             
             So $K_4$ is an example which is MLP exact but not VCLP exact.
+  
+            In (3) and (4), suppose that $Y$ is a minimum vertex cover of $G$. Note that there is no edge $(u, v) \in E$ such that both $u, v \in V \setminus Y$. Because $u, v \in V \setminus Y$ means that $(u, v)$ is not covered by $Y$, which is contradict with $Y$ being a vertex cover.
+
+            \item VCLP is to minimize $c^Ty$ with constraints $A\cdot y\geq b$, and MLP is to maximize $b^Tx$ with constraints $A^Tx\leq c$, where $b=1,c=1$. 
+            
+            So there is $$x^T \cdot b \leq x^T \cdot A \cdot y \leq c^T \cdot y$$
+
+            By strong duality, let optimal solution be $x^{(0)},y^{(0)}$, there is $b^T * x^{(0)} = c^T * y^{(0)}$
+            
+            Let $A \cdot y^{(0)}=b^{(0)}$，there is $(b^T - b_0^T)\cdot x_0=0$. As $A\cdot y >= b$, there is $b_e-b^{(0)}_e\leq 0,\forall e\in E$. Besides, there is $x^{(0)}_e\geq 0,\forall e\in E$. 
+            
+            So if $b^T_e-b^{(0)}_e<0$，there is $x^{(0)}_e=0$. 
+
+            Let $y^{(0)}$ be the solution corresponding to the vertex cover(by VCLP exact, it is an optimal solution of VCLP), then there is 
+            $b_e-b^{(0)}_e=1-2<0,\forall e\in Y$, so $x^{(0)}_e=0,\forall e\in Y$ for each optimal solution $x^{(0)}$ of the MLP. 
+            
+            \item Define $N(\cdot)$ be: 
+            $$N(A)=\{v:v\text{ is the neighbor of some }u\in A\}\cap (V \setminus Y)$$
+            We claim that if $A\subseteq Y$, then $|A|\leq |N(A)|$. 
+
+            Otherwise, if $A\subseteq Y$ and there is $|B|<|A|$ where $B=N(A)$. 
+
+            Consider an optimal solution of VCLP relative to $Y$(that is, if $v\in Y$, $y_v=1$, otherwise $y_v=0$). Let 
+            \begin{equation*}
+                y_v'=
+                \begin{cases}
+                    y_v-\epsilon&,v\in A\\
+                    y_v+\epsilon&,v\in B\\
+                    y_v &,\text{ otherwise. }
+                \end{cases}
+            \end{equation*}
+            where $\epsilon < \frac{1}{2}$. For edge $(u, v) \in E$: 
+    
+            a) $y_u'+y_v'\geq 1$ for $u,v\in A$. Since there is $y_u'+y_v'= (1-\epsilon)+(1-\epsilon)=2-2\epsilon>1$; 
+            
+            b) $y_u' + y_v' \geq 1$ for $u \in A, v \in Y \setminus A$. Since there is $y_u' + y_v' = (1 - \epsilon) + 1 = 2 - \epsilon > 1$;
+    
+            c) $y_u'+y_v'\geq 1$ for $u\in A, v\in B$. Since there is $y_u'+y_v' = (1-\epsilon) + \epsilon=1$;
+            
+            d) $y_u' + y_v' \geq 1$ for $u \in Y \setminus A, v \in B$. Since there is $y_u' + y_v' = 1 + \epsilon > 1$;
+    
+            e) The rest of constraints remains holding since the left hand side is not changed from solution $(y_v)$. 
+    
+            So $(y_v)'$ is a solution to the VCLP, too. But it is $\epsilon(|A|-|B|)$ less than solution $(y_v)$, which rises a contradiction that $Y$ is a minimum solution. 
+        
+            Hence what we claimed is proved. Remove all edges from $Y$ to $Y$, the graph is a bipartite graph $G$ with $L = Y$, $R = V\backslash Y$. By what we claimed, there is $|L|\leq|R|$
+
+            Notice that what we claimed exactly means that the condition of Hall's Theorem is satisfied, so by Hall's Theorem, there is a perfect matching of size $|L|=|Y|$. 
         \end{enumerate}
-    \end{proof}
-
-    Suppose that $Y$ is a minimum vertex cover of $G$. Note that there is no edge $(u, v) \in E$ such that both $u, v \in V \setminus Y$. Because $u, v \in V \setminus Y$ means that $(u, v)$ is not covered by $Y$, which is contradict with $Y$ being a vertex cover.
-
-    To solve (3) and (4), define a function $N(\cdot)$ relative to 
-    a VCLP exact graph $G=(V,E)$ and a minimum vertex cover $Y$ that: 
-    $$
-    N(A)=\left\{
-        \begin{aligned}
-        &\{v:v\text{ is the neighbor of some }u\in A\}\cap (V \setminus Y) &, \text{if }A\subseteq Y \\
-        &\{v:v\text{ is the neighbor of some }u\in A\}\cap Y &, \text{if }A\subseteq V \setminus Y 
-        \end{aligned}
-    \right.
-    $$
-    \begin{thm}{Lemma}{}
-        If $A\subseteq Y$, then $|A|\leq |N(A)|$. Vise versa, 
-        if $A\subseteq V \setminus Y$, then $|A|\geq |N(A)|$. 
-    \end{thm}
-    \begin{proof}
-        If $A\subseteq Y$ and there is $|B|<|A|$ where $B=N(A)$. 
-        Consider an optimal solution of VCLP relative to $Y$(that is, if $v\in Y$, $y_v=1$, otherwise $y_v=0$). Let 
-        \begin{equation*}
-            y_v'=
-            \begin{cases}
-                y_v-\epsilon&,v\in A\\
-                y_v+\epsilon&,v\in B\\
-                y_v &,\text{ otherwise. }
-            \end{cases}
-        \end{equation*}
-        where $\epsilon < \frac{1}{2}$. To prove that $(y_v')$ is also a solution for VCLP, we only need to check that for edge $(u, v) \in E$: 
-
-        a) $y_u'+y_v'\geq 1$ for $u,v\in A$. Since there is $y_u'+y_v'= (1-\epsilon)+(1-\epsilon)=2-2\epsilon>1$; 
-        
-        b) $y_u' + y_v' \geq 1$ for $u \in A, v \in Y \setminus A$. Since there is $y_u' + y_v' = (1 - \epsilon) + 1 = 2 - \epsilon > 1$;
-
-        c) $y_u'+y_v'\geq 1$ for $u\in A, v\in B$. Since there is $y_u'+y_v' = (1-\epsilon) + \epsilon=1$;
-        
-        d) $y_u' + y_v' \geq 1$ for $u \in Y \setminus A, v \in B$. Since there is $y_u' + y_v' = 1 + \epsilon > 1$;
-
-        e) The rest of constraints remains holding since the left hand side is not changed from solution $(y_v)$. 
-
-        So $(y_v)'$ is a solution to the VCLP, too. But it is $\epsilon(|A|-|B|)$ less than solution $(y_v)$, which rises a contradiction that $Y$ is a minimum solution. 
-        
-        Likewise, let $A=N(B)$ and use the same method to construct $(y_v')$ can prove the ``vice versa'' part. 
-    \end{proof}
-
-    Now we begin to prove (3) and (4): 
-
-    \begin{proof}
-    (3) Consider the optimal solution of MLP be $X=(x_e)$. Assume there is 
-    $y_1,y_2\in Y, (y_1,y_2)\in V,x_{y_1y_2}=x\geq 0$. Let $A_0=\{y_1,y_2\}, B_0=N(A_0), C_0=N(B_0)$. 
-    
-    By the lemma above, there is $|B_0|>|C_0|$. Let all edges from $C$ to $B$ be $\{e_1,e_2\dots e_m\}$, 
-    there is: 
-    $$\sum_{i=1}^m y_e+2x\leq |C_0|\leq |B_0|$$
-    By the property of vertex cover, any vertex in $B$ can only connected to vertices in $C_0$. 
-    Let $B=\{b_1,b_2\dots b_s\}$, and $v(b_i)=\sum_{\forall e\in E:b_i\in e}x_e$, then there is: 
-    $$\sum_{i=1}^s v(b_i)=\sum_{i=1}^m y_e\leq |B_0|-2x$$. 
-    So there exists $I=\{v_{i_1}, v_{i_2}\dots v_{i_t}\}\subseteq B$, where $\sum_{j=1}^t (1-v(b_{i_j}))\geq 2x$. 
-    We call $1-v(b_i)$ the capacity of vertex $b_i$. 
-    
-    Let $I_1$ be all vertices connected to $y_1$ and in $I$, 
-    and the capacity of $I_1$, $c(I_1)$ is the sum of capacity of vertices in $I_1$, $I_2$ likewise. 
-
-    Let $A_1=\{y_2\},B_1=N(A_1),C_1=N(B_1)$, by the same method, we can prove that the $c(B_1)$ is no less than $x$. 
-    And that means the $c(I_2)$ is no less than $x$, since $I_2$ contains all those vertices with positive capacity in $B_1$
-
-    Without loss of generality, we can assume that $c(I_1)$ is more than $x$. 
-
-    Now we prove that in different cases we can always modify the optimal solution $X$ to get a better solution. 
-
-    In each case, we do the same thing first: let $x_{y_1y_2}=0$(which gives an decreasement of $x$ in the target). 
-    We then define a slack of $(y_i,I_j)(i=1,2;j=1,2,3,4,5)$ be that: 
-
-    Increase $x_e$ for each edge $e$ from $y_i$ to $I_j$ until the constraint of at least one side of $e$ is strict. 
-
-    Let $I_3=I_1\cap I_2, I_4=I_1\backslash I_3, I_5=I_2\backslash I_3$, 
-    
-    a)If the $c(I_5)\geq 0$, do a slack to $(y_2,I_5)$. 
-    Since the $c(I_5\geq )0$, the increasement is more than $0$. 
-    Notice that $c(I_1)$ is not changed, so now we do the slack of $(y_1,I_1)$ and the increasement is not less than $x$. 
-    Not the total increasement is more than $x$, so the new solution is better. 
-
-    b)If $c(I_5)=0$, there is $c(I_2)\geq 0\rightarrow c(I_3)\geq 0$ and $c(I_1)=c(I)\geq 2x$. 
-    Now we do slack of $(y_2,I_3)$ but stop as soon as the increasement is $x$. 
-    Now there is $c(I_1)\geq 2x-x=x$, so doing a slack of $(y_1,I_1)$ can get an increasement more than $x$. 
-    In all, the increasement is more than $x$, so the new solution is better. 
-
-    Since in each case there is a better solution, there is a contradiction (that $(x_e)$ is already the optimal). 
-    So the assumption is incorrect and it is proved. 
-    
-    \bigskip
-    
-    (4) This part is straightly proved by Hall's Theorem and the lemma above. Remove all edges from $Y$ to $Y$, 
-    then the graph is a bipartite graph $G$ with $L = Y$, $R = V\backslash Y$. By the lemma above, the condition of Hall's Theorem is satisfied. 
-    So there is a matching of size $|Y|$. 
     \end{proof}
 \end{document}
 
