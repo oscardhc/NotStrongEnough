@@ -121,18 +121,18 @@
   
             In (3) and (4), suppose that $Y$ is a minimum vertex cover of $G$. Note that there is no edge $(u, v) \in E$ such that both $u, v \in V \setminus Y$. Because $u, v \in V \setminus Y$ means that $(u, v)$ is not covered by $Y$, which is contradict with $Y$ being a vertex cover.
 
-            \item VCLP is to minimize $c^Ty$ with constraints $A\cdot y\geq b$, and MLP is to maximize $b^Tx$ with constraints $A^Tx\leq c$, where $b=1,c=1$. 
+            \item VCLP is to minimize $\mathbf{c}^T\mathbf{y}$ with constraints $A \mathbf{y}\geq \mathbf{b}$, and MLP is to maximize $\mathbf{b}^T\mathbf{x}$ with constraints $A^T \mathbf{x} \leq \mathbf{c}$, where $\mathbf{b} = \mathbf{1}, \mathbf{c} = \mathbf{1}$. 
             
-            So there is $$x^T \cdot b \leq x^T \cdot A \cdot y \leq c^T \cdot y$$
+            So there is $$\mathbf{x}^T \mathbf{b} \leq \mathbf{x}^T A \mathbf{y} \leq \mathbf{c}^T \mathbf{y}$$
 
-            By strong duality, let optimal solution be $x^{(0)},y^{(0)}$, there is $b^T * x^{(0)} = c^T * y^{(0)}$
+            By Strong LP Duality, let an optimal solution be $\mathbf{x^{(0)}},\mathbf{y^{(0)}}$, and there is $\mathbf{b}^T \mathbf{x^{(0)}} = \mathbf{c}^T \mathbf{y^{(0)}}$.
             
-            Let $A \cdot y^{(0)}=b^{(0)}$，there is $(b^T - b_0^T)\cdot x_0=0$. As $A\cdot y >= b$, there is $b_e-b^{(0)}_e\leq 0,\forall e\in E$. Besides, there is $x^{(0)}_e\geq 0,\forall e\in E$. 
-            
-            So if $b^T_e-b^{(0)}_e<0$，there is $x^{(0)}_e=0$. 
+            Let $\mathbf{b^{(0)}} := A\mathbf{y^{(0)}}$. There is $(\mathbf{b}^T - {\mathbf{b^{(0)}}}^T) \mathbf{x^{(0)}} = 0$. As $A \mathbf{y} \geq \mathbf{b}$, there is $b_e - b^{(0)}_e \leq 0$ for all edges $e \in E$. Besides, there is $x^{(0)}_e \geq 0$ for all edges $e \in E$.
 
-            Let $y^{(0)}$ be the solution corresponding to the vertex cover(by VCLP exact, it is an optimal solution of VCLP), then there is 
-            $b_e-b^{(0)}_e=1-2<0,\forall e\in Y$, so $x^{(0)}_e=0,\forall e\in Y$ for each optimal solution $x^{(0)}$ of the MLP. 
+            So, if $b_e - b^{(0)}_e < 0$, then there must be $x^{(0)}_e = 0$.
+
+            Let $\mathbf{y^{(1)}}$ be the solution corresponding to an minimum vertex cover(by VCLP exact, it is an optimal solution of VCLP). Then there is 
+            $b_e-Ay^{1}_e=1-2<0$ for all $e\in Y$. So $x^{0}_e=0$ for all $e\in Y$ for every optimal solution $\mathbf{x^{0}}$ of the MLP.
             
             \item Define $N(\cdot)$ be: 
             $$N(A)=\{v:v\text{ is the neighbor of some }u\in A\}\cap (V \setminus Y)$$
@@ -163,9 +163,9 @@
     
             So $(y_v)'$ is a solution to the VCLP, too. But it is $\epsilon(|A|-|B|)$ less than solution $(y_v)$, which rises a contradiction that $Y$ is a minimum solution. 
         
-            Hence what we claimed is proved. Remove all edges from $Y$ to $Y$, the graph is a bipartite graph $G$ with $L = Y$, $R = V\backslash Y$. By what we claimed, there is $|L|\leq|R|$
+            Hence what we claimed is proved. Remove all edges from $Y$ to $Y$, the graph is a bipartite graph $G$ with $L = Y$, $R = V \setminus Y$. By what we claimed, there is $|L|\leq|R|$.
 
-            Notice that what we claimed exactly means that the condition of Hall's Theorem is satisfied, so by Hall's Theorem, there is a perfect matching of size $|L|=|Y|$. 
+            Notice that what we claimed exactly means that the condition of Hall's Theorem is satisfied, so by Hall's Theorem, there is a matching of size $|L|=|Y|$. 
         \end{enumerate}
     \end{proof}
 \end{document}
