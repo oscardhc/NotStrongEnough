@@ -5,24 +5,24 @@
     \maketitle
 
     \begin{thm}{}{}
-        Let $v(G)$ denote the size of a maximum matching of $G$.
-        Obviously, $val(MLP(G))\ge v(G)$ for all graphs.
-        Show that $v(G)=val(MLP(G))$ for all bipartite graphs $G$.
-        Do this without referring to Konig's Theorem.
+        Let $\nu(G)$ denote the size of a maximum matching of $G$.
+        Obviously, ${\rm val}({\rm MLP}(G))\ge \nu(G)$ for all graphs.
+        Show that $\nu(G)={\rm val}({\rm MLP}(G))$ for all bipartite graphs $G$.
+        Do this without referring to K\H{o}nig's Theorem.
     \end{thm}
     \begin{proof}[Solution]
-        Suppose $X$ is a solution to $MLP(G)$.
-        $E_F$ is the set of edges with fractional values in X.
+        Suppose $\mathbf{x}$ is a solution to MLP$(G)$.
+        $E_F$ is the set of edges with fractional values in $\mathbf{x}$.
         First do as follows:
         \begin{itemize}
             \item[(1)] If $E_F$ doesn't contain a cycle, terminate.
             \item[(2)] Find a cycle in $E_F$ with fractional values, denote it $C:=\{e_i\in E_F :1\le i \le n,i\in\mathbb{N}\}$.
-            \item[(3)] Add $x_{e_{2k-1}}$ by $\epsilon$ and $x_{e_{2k}}$ by $-\epsilon$ for $\{k\in \mathbb{N}:k<=n/2\}$.
+            \item[(3)] Add $x_{e_{2k-1}}$ by $\epsilon$ and $x_{e_{2k}}$ by $-\epsilon$ for $\{k\in \mathbb{N}:k \le n/2\}$.
             \item[(4)] Increase $\epsilon$ until there exists $i$ such that $x_{e_i}=0 \text{ or } 1$.
             \item[(5)] go to step(2) if there exists a cycle in $E_F$.
         \end{itemize}
-        Since $G$ is a bipartite, C can only be a even cycle, so step (3) makes sense.
-        If we modify the solution by step(3) , obviously the constraints of $MLP(G)$ will still be satisfied, and the target function will remain unchanged.
+        Since $G$ is a bipartite, $C$ can only be a even cycle, so step (3) makes sense.
+        If we modify the solution by step(3), obviously the constraints of MLP$(G)$ will still be satisfied, and the target function will remain unchanged.
         The process will terminate because $|E_F|$ decreases by at least 1 in each iteration.
 
         Then do as follows:
@@ -40,11 +40,12 @@
         The constraints of other vertices $v$ in $P$ will obviously be maintained.
         The process will termintate because $|E_F|$ decreases by at least 1 in each iteration.
 
-        Finally, after 2 processes, the solution becomes integral and the value of target function does not decrease, which means $\text{int-val}(MLP(G))\ge val(MLP(G))$.
-        However we have  $\text{int-val}(MLP(G))\le val(MLP(G))$.
-        So $v(G)=\text{int-val}(MLP(G))= val(MLP(G))$
+        Finally, after 2 processes, the solution becomes integral and the value of target function does not decrease, which means $\text{ int-val}(MLP(G))\ge {\rm val}(MLP(G))$.
+        And we already have  $\text{int-val}(MLP(G))\le {\rm val}(MLP(G))$.
+        So $\nu(G)=\text{int-val}(MLP(G))= {\rm val}(MLP(G))$
     \end{proof}
 
+    \newpage
 
     \begin{thm}{}{}
         We know that $\nu(G) = \tau(G)$ for all bipartite graphs (K\H{o}nig's Theorem) and $\nu(G) \leq \tau(G)$ for all graphs (since every matched edge must be covered by a distinct vertex). Show that $\tau(G) \leq 2\nu(G)$ for all grpahs $G$.
@@ -58,6 +59,8 @@
         So the size of minimum vertex cover $\tau(G) \leq |V'| = 2\nu(G)$.
     \end{proof}
 
+    \bigskip
+
     \begin{thm}{}{}
         Show that $\tau(G) \leq 2{\rm opt}({\rm VCLP}(G))$ for all graphs $G$ (including non-bipartite graphs).
     \end{thm}
@@ -66,6 +69,8 @@
         From (2) we know that $\tau(G) \leq 2\nu(G)$. Since $\nu(G) \leq {\rm opt}({\rm MLP}(G)) \leq {\rm opt}({\rm VCLP}(G))$, it follows that $\tau(G) \leq 2\nu(G) \leq 2{\rm opt}({\rm VCLP}(G))$.
     \end{proof}
 
+    \newpage
+    
     \begin{thm}{}{}
         For a graph $G = (V, E)$, let $\tau(G)$ denote the size of a minimum vertex cover, and $\nu(G)$ the size of a maximum matching. Recall the two linear programs VCLP and MLP. Let $\tau_f(G) := {\rm opt}({\rm VCLP}(G))$ and $\nu_f(G) := {\rm opt}({\rm MLP}(G))$. Note that
         $$
@@ -89,7 +94,7 @@
         \includegraphics[width=0.16\textwidth]{figure4_2.pdf}
     \end{center}
 
-    \begin{proof}[Solution.]
+    \begin{proof}[Solution to (1) and (2).]
         ~
         \begin{enumerate}
             \item The example is $G_1$ in the upper left. It is not bipartite since $B, C, D$ constitute an odd cycle.
@@ -116,46 +121,54 @@
         \end{enumerate}
     \end{proof}
 
+    Suppose that $Y$ is a minimum vertex cover of $G$. Note that there is no edge $(u, v) \in E$ such that both $u, v \in V \setminus Y$. Because $u, v \in V \setminus Y$ means that $(u, v)$ is not covered by $Y$, which is contradict with $Y$ being a vertex cover.
+
     To solve (3) and (4), define a function $N(\cdot)$ relative to 
     a VCLP exact graph $G=(V,E)$ and a minimum vertex cover $Y$ that: 
-    \begin{equation*}
-        N(A)=\begin{cases}
-                &\{v:v\text{ is the neighbor of some }u\in A\}\cap V\backslash Y, \text{if }A\subseteq Y\\
-                &\{v:v\text{ is the neighbor of some }u\in A\}\cap Y, \text{if }A\subseteq V\backslash Y\\
-            \end{cases}
-    \end{equation*}
+    $$
+    N(A)=\left\{
+        \begin{aligned}
+        &\{v:v\text{ is the neighbor of some }u\in A\}\cap (V \setminus Y) &, \text{if }A\subseteq Y \\
+        &\{v:v\text{ is the neighbor of some }u\in A\}\cap Y &, \text{if }A\subseteq V \setminus Y 
+        \end{aligned}
+    \right.
+    $$
     \begin{thm}{Lemma}{}
         If $A\subseteq Y$, then $|A|\leq |N(A)|$. Vise versa, 
-        if $A\subseteq V\backslash Y$, then $|A|\geq |N(A)|$. 
+        if $A\subseteq V \setminus Y$, then $|A|\geq |N(A)|$. 
     \end{thm}
     \begin{proof}
         If $A\subseteq Y$ and there is $|B|<|A|$ where $B=N(A)$. 
-        Consider the solution of VCLP relative to $Y$(that is, if $v\in Y$, $y_v=1$, otherwise $y_v=0$). Let 
+        Consider an optimal solution of VCLP relative to $Y$(that is, if $v\in Y$, $y_v=1$, otherwise $y_v=0$). Let 
         \begin{equation*}
             y_v'=
             \begin{cases}
                 y_v-\epsilon&,v\in A\\
                 y_v+\epsilon&,v\in B\\
-                y_v &,\text{ otherwise }
+                y_v &,\text{ otherwise. }
             \end{cases}
         \end{equation*}
-        where $\epsilon < \frac{1}{2}$. To prove that $(y_v')$ is also a solution for VCLP, we only need to check: 
+        where $\epsilon < \frac{1}{2}$. To prove that $(y_v')$ is also a solution for VCLP, we only need to check that for edge $(u, v) \in E$: 
 
-        a)$y_u'+y_v'\geq 1,u,v\in Y$. There is $y_u'+y_v'\geq 1-\epsilon+1-\epsilon=2-2\epsilon>1$; 
-
-        b)$y_u'+y_v'\geq 1,u\in A,v\in V\backslash B$. There is $y_u'+y_v'\geq (1-\epsilon) + \epsilon=1$; 
-
-        The rest constraints remains true since the left hand side is not changed from solution $(y_v)$. 
-
-        So $(y_v)'$ is a solution to the VCLP too, but it is $\epsilon(|A|-|B|)$ less than solution $(y_v)$, which rises a contradiction that $Y$ is a minimum solution. 
+        a) $y_u'+y_v'\geq 1$ for $u,v\in A$. Since there is $y_u'+y_v'= (1-\epsilon)+(1-\epsilon)=2-2\epsilon>1$; 
         
-        Likewise, let $A=N(B)$ and use the same method to construct $(y_v')$ can prove the 'vice versa' part. 
+        b) $y_u' + y_v' \geq 1$ for $u \in A, v \in Y \setminus A$. Since there is $y_u' + y_v' = (1 - \epsilon) + 1 = 2 - \epsilon > 1$;
+
+        c) $y_u'+y_v'\geq 1$ for $u\in A, v\in B$. Since there is $y_u'+y_v' = (1-\epsilon) + \epsilon=1$;
+        
+        d) $y_u' + y_v' \geq 1$ for $u \in Y \setminus A, v \in B$. Since there is $y_u' + y_v' = 1 + \epsilon > 1$;
+
+        e) The rest of constraints remains holding since the left hand side is not changed from solution $(y_v)$. 
+
+        So $(y_v)'$ is a solution to the VCLP, too. But it is $\epsilon(|A|-|B|)$ less than solution $(y_v)$, which rises a contradiction that $Y$ is a minimum solution. 
+        
+        Likewise, let $A=N(B)$ and use the same method to construct $(y_v')$ can prove the ``vice versa'' part. 
     \end{proof}
 
     Now we begin to prove (3) and (4): 
 
     \begin{proof}
-    (3) Consider the optimal solution of MLP be $X=(x_e)$, assume there is 
+    (3) Consider the optimal solution of MLP be $X=(x_e)$. Assume there is 
     $y_1,y_2\in Y, (y_1,y_2)\in V,x_{y_1y_2}=x\geq 0$. Let $A_0=\{y_1,y_2\}, B_0=N(A_0), C_0=N(B_0)$. 
     
     By the lemma above, there is $|B_0|>|C_0|$. Let all edges from $C$ to $B$ be $\{e_1,e_2\dots e_m\}$, 
@@ -197,9 +210,11 @@
     Since in each case there is a better solution, there is a contradiction (that $(x_e)$ is already the optimal). 
     So the assumption is incorrect and it is proved. 
     
-    \item This part is straightly proved by Hall's Lemma and the lemma above. Remove all edges from $Y$ to $Y$, 
-    then the graph is a bipartite graph: $G=(Y,V\backslash Y)$. By the lemma above, the condition of Hall's Lemma is satisfied. 
-    So there is a perfect matching of size $|Y|$. 
+    \bigskip
+    
+    (4) This part is straightly proved by Hall's Theorem and the lemma above. Remove all edges from $Y$ to $Y$, 
+    then the graph is a bipartite graph $G$ with $L = Y$, $R = V\backslash Y$. By the lemma above, the condition of Hall's Theorem is satisfied. 
+    So there is a matching of size $|Y|$. 
     \end{proof}
 \end{document}
 
