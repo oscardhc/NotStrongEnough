@@ -1,0 +1,52 @@
+\documentclass[UTF8, a4paper, linespread=1.5]{article}
+
+\usepackage{tcolorbox, listings, algorithm, minted, algpseudocode}
+\usepackage{geometry, savesym, amsmath, enumerate, indentfirst, color, amsthm, bm, extarrows, ulem}
+\usepackage{amssymb}
+\usepackage{nameref, hyperref}
+ \geometry{top=3cm, bottom=3cm, left=1.5cm, right=1.5cm}
+
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+\renewcommand\contentsname{Contents}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+% \setlength{\leftskip}{10pt}
+\setlength{\parindent}{10pt}
+% \setlength{\parskip}{2em}
+\renewcommand{\baselinestretch}{1.3}
+
+\newcounter{RomanNumber}
+\newcommand{\mrm}[1]{(\setcounter{RomanNumber}{#1}\Roman{RomanNumber})}
+
+\newtcbtheorem{thm}{}
+  {enhanced, theorem name and number, code={\edef\@currentlabelname{#2}}, 
+  frame code={
+        % \path[thick, draw] (frame.north west) -| (frame.north east) -| (frame.south east) -| (frame.south west) -| (frame.north west);
+        \path[thick, draw] (frame.north west)  +(.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.north east) +(-.5\baselineskip,0) -| +(0,-.5\baselineskip);
+        % \path[thick, draw] (frame.south west) +(.5\baselineskip,0) -| +(0,.5\baselineskip);
+        \path[thick, draw] (frame.south east) +(-.5\baselineskip,0) -| +(0,.5\baselineskip);
+    },
+    left=1mm, right=1mm, top=1mm, bottom=1mm,
+    colback=black!5,
+    colframe=red!75!black,
+    colbacktitle=black!0,
+    coltitle=black!100,
+    fonttitle=\bfseries}{thm}
+
+
+\usepackage{environ}
+\RenewEnviron{math}{%
+\begin{align*}
+\BODY
+\end{align*}
+}
+
+\title{CS217 -- Algorithm Design and Analysis \\ Homework 7}
+\date{\today}
+\author{Not Strong Enough}
+
