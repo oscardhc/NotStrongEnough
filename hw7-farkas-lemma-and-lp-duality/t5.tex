@@ -11,19 +11,20 @@
         \text{the length of the shortest path from } s \text{ to } u, \text{ otherwise }
     \end{cases}$$
 
-    We claim that $z_u' = d(u)$ is an optimal solution. 
+    Without loss of generality, we fix $z_s' = 0$. We claim that $z_u' = d(u)$ is an optimal solution. 
     \begin{itemize}
-        \item $\forall v \in V$, $z_v' = d(v) \in \mathbb R $.
+        \item $\forall v \in V$, $z_v' = d(v) \in \mathbf R $.
         \item $\forall e = (u, v) \in E$, assume that $d(v) - d(u) > c(e)$. This suggests that the length of the shortest path from $s$ to $t$ with length $d(u) + c(e)$, which is a contradiction to the definition.
         \item $z_t' - z_s'$ is maximized by letting $z_v' = d(v)$:
-            WLOG, let $z_s' = 0$ and assume that $z_t' - z_s' = z_t' > d(t)$.
+        
+            Assume that $z_t' - z_s' = z_t' > d(t)$.
 
-            Let the shortest path from $s$ to $t$ be $v_1, v_2, \cdots , v_r$ where $v_1 = s$ and $v_r = t$. We have $d(v_{i+1}) = d(v_i) + e((v_i, v_{i+1}))$.
+            Let the shortest path from $s$ to $t$ be $v_1, v_2, \cdots , v_r$ where $v_1 = s$ and $v_r = t$. We have $d(v_{i+1}) = d(v_i) + c((v_i, v_{i+1}))$.
 
             We next prove that $\forall i \in [r], z_{v_i}' > d({v_i})$ by induction from $r$ to $1$.
             \begin{itemize}
                 \item Base: $z_{v_r}' > d(v_r)$ by our previous assumption.
-                \item Inductive step: By inductive hypothesis, we have $z_{v_{i+1}}' > d(v_{i+1})$.
+                \item Inductive step: By inductive hypothesis, we have $z_{v_{i+1}}' > d(v_{i+1})$ for $i \in [r - 1]$.
 
                     Then $z_{v_i}' + c(e_i) \ge z_{v_{i+1}}' > d(v_{i+1}) = d(v_i) + c(e_i) \implies z_{v_i}' > d(v_i)$.
             \end{itemize}

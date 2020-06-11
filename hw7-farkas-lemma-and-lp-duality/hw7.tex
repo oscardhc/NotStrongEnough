@@ -1,0 +1,179 @@
+\input{template.tex}
+
+\begin{document}
+
+    \maketitle
+
+    \begin{thm}{}{}
+        Show that the three versions of Farkas Lemma presented in class are all equivalent:
+        \begin{align*}
+        (\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}=\mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) &(1)\\
+        (\neg \exists \mathbf{x}\ge \mathbf{0}: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) &(2)\\
+        (\neg \exists \mathbf{x}\ge \mathbf{0}: \mathbf{A}\mathbf{x}= \mathbf{b}) &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0)&(3)
+        \end{align*}
+    \end{thm}
+    \begin{proof}
+        $(1)\Rightarrow(3)$:
+        
+        Let $\mathbf{A}'=\left[
+        \begin{matrix}
+        \mathbf{A} \\
+        -\mathbf{A} \\
+        -\mathbf{I}
+        \end{matrix}
+        \right],
+        \mathbf{b}'=\left[
+        \begin{matrix}
+        \mathbf{b} \\
+        -\mathbf{b} \\
+        \mathbf{0}
+        \end{matrix}
+        \right]$.
+        Then \begin{align*}
+        (\neg \exists \mathbf{x}\ge \mathbf{0}: \mathbf{A}\mathbf{x}= \mathbf{b})&\iff(\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b},-\mathbf{A}\mathbf{x}\le-\mathbf{b},-\mathbf{x}\le \mathbf{0})\\
+        &\iff(\neg \exists \mathbf{x}: \mathbf{A}'\mathbf{x}\le \mathbf{b}') \\
+        &\iff(\exists \mathbf{y}'\ge \mathbf{0} :\mathbf{y}'^{T}\mathbf{A}'=\mathbf{0},\mathbf{y}'^{T}\mathbf{b}'<0) &(\text{derived from} (1))\\
+        &\iff(\exists \mathbf{y}_1,\mathbf{y}_2,\mathbf{z}\ge \mathbf{0}:(\mathbf{y}_{1}^{T}-\mathbf{y}_{2}^{T})\mathbf{A}-\mathbf{z}=\mathbf{0},(\mathbf{y}_{1}^{T}-\mathbf{y}_{2}^{T})\mathbf{b}<0) &(\text{Let }\mathbf{y}'=\left[\begin{matrix} \mathbf{y}_1 \\\mathbf{y}_2 \\\mathbf{z} \end{matrix}\right])\\
+        &\iff(\exists \mathbf{z}\ge \mathbf{0}, \mathbf{y}:\mathbf{y}^{T}\mathbf{A}=\mathbf{z},\mathbf{y}^{T}\mathbf{b}<0) &(\mathbf{y}=\mathbf{y}_1-\mathbf{y}_2) \\
+        &\iff(\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0)
+        \end{align*}
+        
+        $(3)\Rightarrow(2)$:
+        
+        let $\mathbf{A}'=\left[
+        \begin{matrix}
+        \mathbf{A} & \mathbf{I}
+        \end{matrix}
+        \right]$.
+        \begin{align*}
+        (\neg \exists \mathbf{x}\ge \mathbf{0}: \mathbf{A}\mathbf{x}\le \mathbf{b})&\iff (\neg \exists \mathbf{x},\mathbf{z}\ge \mathbf{0}:\mathbf{A}\mathbf{x}+\mathbf{z}=\mathbf{b}) &(\mathbf{A}\mathbf{x}\le \mathbf{b} \iff \exists \mathbf{z}\ge \mathbf{0},\mathbf{A}\mathbf{x}+\mathbf{z}=\mathbf{b})\\
+        &\iff (\neg \exists \mathbf{x}'\ge \mathbf{0}:\mathbf{A}'\mathbf{x}'=\mathbf{b})  &(\text{let }\mathbf{x}'=\left[ \begin{matrix} \mathbf{x} \\ \mathbf{z}\end{matrix} \right])\\
+        &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}'\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) &(\text{derived from} (3)) \\
+        &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) \\
+        &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) \\
+        \end{align*}
+        
+        $(2)\Rightarrow(1)$:
+        
+        Let $\mathbf{A}'=\left[
+        \begin{matrix}
+        \mathbf{A} & -\mathbf{A}
+        \end{matrix}
+        \right]$.
+        \begin{align*}
+        (\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\neg \exists \mathbf{x}_1,\mathbf{x}_2\ge \mathbf{0}: \mathbf{A}(\mathbf{x}_1-\mathbf{x}_2)\le \mathbf{b}) \\
+        &\iff (\neg \exists \mathbf{x}'\ge \mathbf{0}: \mathbf{A}'\mathbf{x}'\le \mathbf{b}) &(\text{let }\mathbf{x}'=\left[ \begin{matrix}\mathbf{x}_1 \\\mathbf{x}_2  \end{matrix} \right])\\
+        &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}'\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) &(\text{derived from} (2)) \\
+        &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},-\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) \\
+        &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}= \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0)
+        \end{align*}
+    \end{proof}
+
+    \newpage
+    
+    \begin{thm}{}{}
+        Let $d$ be the shortest path distance from $s$ to $t$ in the directed graph $G$, where distance means sum of the $c(e)$ along the path. Show that opt($MCF$) $= d$.
+    \end{thm}
+    
+    \begin{proof}
+        First we show that opt($MCF$) $\leqslant d$. This is quite easy. Suppose $(v_1, \ldots v_k)$ where $k \geqslant 1$ and $(v_i, v_{i + 1}) \in E, v_1 = s, v_k = t$ is a shortest path in graph $G$. Then we can write a feasible solution to MCF by setting all $f(v_i, v_{i + 1}) = 1$ and setting the flow of edges which are not in the shortest path to $0$. (Obviously the two constraints of MCF are both satisfied.) Note that the value of this solution is exactly $d$, since $\sum_{e \in E} c(e) f(e) = \sum_{i = 1}^{k - 1} (c(v_i, v_{i + 1}) \cdot 1) = d$. Hence opt($MCF$) $\leqslant d$.
+        
+        Next we show that opt($MCF$) $\geqslant d$. We prove by contradiction. Assume that opt($MCF$) $< d$. Suppose we have a feasible solution $f^*$ with ${\rm val}(f^*) < d$. The idea is first to split the flow $f^*$ into some {\it single-path-flows}. And then we will show that among such $s-t$-paths, at least one path $P^*$ satisfies that $\sum_{e \in P^*} c(e) < d$. So $d$ is not the shortest path distance from $s$ to $t$, and it leads to a contradiction.
+        
+        \bigskip
+        
+        Now we focus on how to split $f^*$ into multiple single-path-flows. We first choose an edge $(u, v)$ such that $f(u, v)$ is non-negative and minimum among all edges in $G$. Since $f(u, v) \neq 0$ is minimum, we can always find a path from $s$ to $u$ and a path from $v$ to $t$ such that the flows of all the edges in both paths are at least $f(u, v)$ (e.g., using DFS or BFS). Let the two paths be $P_u$ and $P_v$. Connecting $P_u$, $P_v$ with $(u, v)$ we get a new path $P = \left(P_u, (u, v), P_v\right)$, with the flows of all edges on this path being at least $f(u, v)$ and the flow contribution of this path being exactly $f(u, v)$.
+        
+        So we can ``extract'' this path from $G$ by decreasing the flow of edges in this path by $f(u, v)$. Note that edge $(u, v)$ now has flow $0$. After extraction, we get a new graph $G'$ and a new ``flow function'' ${f^*}'$. We can validate that ${f^*}'$ is still a real flow by checking the flow-conservative contraint: the inflow decrease and outflow decrease of every vertices on path $P$ are always the same, and the extraction does not influence the inflow and outflow of vertices not on $P$. So ${f^*}'$ is a real flow.
+        
+        Repeat the ``find minimum and then extract'' process on the new graph. Note that each time the number of edges with non-negative flow is decreased by $1$, and the total number of edges in a graph is finite, so the process will surely terminate. Finally we get many single-path-flows. We claim that among these single-path-flows, at least one path $P^*$ satisfies that $\sum_{e \in P^*} c(e) < d$. Otherwise every single-path-flow has sum of $c(e)$ along the path being at least $d$, and it follows that ${\rm val}(f) \geqslant d$, which contradicts with our assumption. However, $\sum_{e \in P^*} c(e) < d$ is impossible since $d$ is the shortest minimum path distance, which also contradicts with this premise. So we have opt($MCF$) $\geqslant d$.
+        
+        \bigskip
+        
+        Combining opt($MCF$) $\leqslant d$ and opt($MCF$) $\geqslant d$ we can finally conclude that opt($MCF$) $= d$.
+    \end{proof}
+
+    \newpage
+    
+    \begin{thm}{}{}
+        Write down the dual of MCF. 
+    \end{thm}
+    
+    \begin{proof}
+        First, we write down MCF in terms of inequality: 
+        \begin{align*}
+        {\rm minimize}\ &\sum_{e\in E}c(e)f(e)\\
+        {\rm subject\ to}\ &\sum_{e\in E:e=(u,t)}f(e)\geq 1 & \text{(corresponds to $y_t^+$ in dual form)}\\
+        &\sum_{e\in E:e=(u,t)}-f(e)\geq -1 & \text{(corresponds to $y_t^-$ in dual form)}\\
+        &\sum_{e\in E:e=(u,v)}f(e)-\sum_{e\in E:e=(v,w)}f(e)\geq 0,\forall v\in V\setminus\{s,t\} & \text{(corresponds to $y_v^+$ in dual form)}\\
+        &\sum_{e\in E:e=(v,w)}f(e)-\sum_{e\in E:e=(u,v)}f(e)\geq 0,\forall v\in V\setminus\{s,t\} & \text{(corresponds to $y_v^-$ in dual form)}\\
+        &f(e) \geq 0, \forall e \in E.
+        \end{align*}
+        Then write down its dual LP: (Let $S=\{e\in E:e=(s,v),v\in V\}$)
+        \begin{align*}
+        {\rm maximize}\ &y_t^+-y_t^-\\
+        {\rm subject\ to}\ &(y_v^+-y_v^-)-(y_u^+-y_u^-)\leq c(e),\forall e=(u,v)\in E\setminus S\\
+        &y_v^+-y_v^-\leq c(e),\forall e=(s,v)\in S \\
+        & y_v^+, y_v^- \geq 0, \forall v\in V\setminus\{s,t\} \\
+        & y_t^+, y_t^- \geq 0.
+        \end{align*}
+        Now let $z_u=y_u^+-y_u^-$ for all vertices $u$, it turns to be: 
+        \begin{align*}
+        {\rm maximize}\ &z_t\\
+        {\rm subject\ to}\ &z_v-z_u\leq c(e),\forall e=(u,v)\in E\setminus S\\
+        &z_v\leq c(e),\forall e=(s,v)\in S \\
+        & z_v \in \mathbf{R}, \forall v v\in V\setminus\{s,t\} \\
+        & z_t \in \mathbf{R}.
+        \end{align*}
+        Let $z_v'=z_v+z_s'$, for all vertices $u$ except for $s$ and the problem turns to: 
+        \begin{align*}
+        {\rm maximize}\ &z_t'-z_s'\\
+        {\rm subject\ to}\ &z_v'-z_u'\leq c(e),\forall e=(u,v)\in E \\
+        & z_v' \in \mathbf{R}, \forall v \in V.
+        \end{align*}
+    \end{proof}
+    
+    \begin{thm}{}{}
+        Interpret the dual. Show that it is the LP formulation of a ``natural'' maximization problem on G
+    \end{thm}
+    
+    \begin{proof}[Solution]
+        Consider that each vertex has a potential, and for each edge $e=(u,v)$, 
+        the potential of the terminal vertex $v$ is no greater than the potential of the start vertex $u$ plus $c(u, v)$, 
+        and our goal is to maximize the potential of $t$. 
+    \end{proof}
+
+    \newpage
+    
+    \begin{proof}[Solution]
+        Let $c(e)$ be lengths of edges and 
+        $$d(u) := \begin{cases}
+        0, u = s \\
+        \text{the length of the shortest path from } s \text{ to } u, \text{ otherwise }
+        \end{cases}$$
+        
+        Without loss of generality, we fix $z_s' = 0$. We claim that $z_u' = d(u)$ is an optimal solution. 
+        \begin{itemize}
+            \item $\forall v \in V$, $z_v' = d(v) \in \mathbf R $.
+            \item $\forall e = (u, v) \in E$, assume that $d(v) - d(u) > c(e)$. This suggests that the length of the shortest path from $s$ to $t$ with length $d(u) + c(e)$, which is a contradiction to the definition.
+            \item $z_t' - z_s'$ is maximized by letting $z_v' = d(v)$:
+            
+            Assume that $z_t' - z_s' = z_t' > d(t)$.
+            
+            Let the shortest path from $s$ to $t$ be $v_1, v_2, \cdots , v_r$ where $v_1 = s$ and $v_r = t$. We have $d(v_{i+1}) = d(v_i) + c((v_i, v_{i+1}))$.
+            
+            We next prove that $\forall i \in [r], z_{v_i}' > d({v_i})$ by induction from $r$ to $1$.
+            \begin{itemize}
+                \item Base: $z_{v_r}' > d(v_r)$ by our previous assumption.
+                \item Inductive step: By inductive hypothesis, we have $z_{v_{i+1}}' > d(v_{i+1})$ for $i \in [r - 1]$.
+                
+                Then $z_{v_i}' + c(e_i) \ge z_{v_{i+1}}' > d(v_{i+1}) = d(v_i) + c(e_i) \implies z_{v_i}' > d(v_i)$.
+            \end{itemize}
+            
+            Hence, $z_s' > d(s) = 0$, which is a contradiction.
+        \end{itemize}
+        
+        Therefore, $z_u' = d(u)$ is an optimal solution to the dual program.
+    \end{proof}
+\end{document}
+
