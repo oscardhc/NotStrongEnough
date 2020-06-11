@@ -1,0 +1,36 @@
+\input{template.tex}
+\begin{document}
+\begin{thm}{}{}
+    Describe an optimal solution of the dual program.
+\end{thm}
+
+\begin{proof}[Solution]
+    Let $c(e)$ be lengths of edges and 
+    $$d(u) := \begin{cases}
+        0, u = s \\
+        \text{the length of the shortest path from } s \text{ to } u, \text{ otherwise }
+    \end{cases}$$
+
+    We claim that $z_u' = d(u)$ is an optimal solution. 
+    \begin{itemize}
+        \item $\forall v \in V$, $z_v' = d(v) \in \mathbb R $.
+        \item $\forall e = (u, v) \in E$, assume that $d(v) - d(u) > c(e)$. This suggests that the length of the shortest path from $s$ to $t$ with length $d(u) + c(e)$, which is a contradiction to the definition.
+        \item $z_t' - z_s'$ is maximized by letting $z_v' = d(v)$:
+            WLOG, let $z_s' = 0$ and assume that $z_t' - z_s' = z_t' > d(t)$.
+
+            Let the shortest path from $s$ to $t$ be $v_1, v_2, \cdots , v_r$ where $v_1 = s$ and $v_r = t$. We have $d(v_{i+1}) = d(v_i) + e((v_i, v_{i+1}))$.
+
+            We next prove that $\forall i \in [r], z_{v_i}' > d({v_i})$ by induction from $r$ to $1$.
+            \begin{itemize}
+                \item Base: $z_{v_r}' > d(v_r)$ by our previous assumption.
+                \item Inductive step: By inductive hypothesis, we have $z_{v_{i+1}}' > d(v_{i+1})$.
+
+                    Then $z_{v_i}' + c(e_i) \ge z_{v_{i+1}}' > d(v_{i+1}) = d(v_i) + c(e_i) \implies z_{v_i}' > d(v_i)$.
+            \end{itemize}
+
+            Hence, $z_s' > d(s) = 0$, which is a contradiction.
+    \end{itemize}
+
+    Therefore, $z_u' = d(u)$ is an optimal solution to the dual program.
+\end{proof}
+\end{document}
