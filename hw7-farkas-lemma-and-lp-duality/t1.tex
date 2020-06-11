@@ -1,4 +1,4 @@
-\usepackage{amsmath}%! Author = jinho
+%! Author = jinho
 %! Date = 6/11/2020
 
 % Preamble
@@ -9,65 +9,65 @@
     \begin{thm}{}{}
         Show that the three versions of Farkas Lemma presented in class are all equivalent:
         \begin{align*}
-            (\neg \exists x: Ax\le b) &\iff (\exists y\ge 0 :y^{T}A=0,y^{T}b<0) &(1)\\
-            (\neg \exists x\ge 0: Ax\le b) &\iff (\exists y\ge 0 :y^{T}A\ge 0,y^{T}b<0) &(2)\\
-            (\neg \exists x\ge 0: Ax= b) &\iff (\exists y :y^{T}A\ge 0,y^{T}b<0)&(3)
+            (\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}=0,\mathbf{y}^{T}\mathbf{b}<0) &(1)\\
+            (\neg \exists \mathbf{x}\ge 0: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}^{T}\mathbf{b}<0) &(2)\\
+            (\neg \exists \mathbf{x}\ge 0: \mathbf{A}\mathbf{x}= \mathbf{b}) &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}^{T}\mathbf{b}<0)&(3)
         \end{align*}
     \end{thm}
     \begin{proof}
         $(1)\Rightarrow(3)$:
 
-        Let $A'=\left[
+        Let $\mathbf{A}'=\left[
         \begin{matrix}
-            A \\
-            -A \\
+            \mathbf{A} \\
+            -\mathbf{A} \\
             -I
         \end{matrix}
         \right],
-        b'=\left[
+        \mathbf{b}'=\left[
         \begin{matrix}
-            b \\
-            -b \\
+            \mathbf{b} \\
+            -\mathbf{b} \\
             0
         \end{matrix}
         \right]$.
         Then \begin{align*}
-            (\neg \exists x\ge 0: Ax= b)&\iff(\neg \exists x: Ax\le b,-Ax\le-b,-x\le 0)\\
-                                        &\iff(\neg \exists x: A'x\le b') \\
-                                        &\iff(\exists y'\ge 0 :y'^{T}A'=0,y'^{T}b'<0) &(\text{derived from} (1))\\
-                                        &\iff(\exists y1,y2,z\ge 0:(y_{1}^{T}-y_{2}^{T})A-z=0,(y_{1}^{T}-y_{2}^{T})b<0) &(\text{Let }y'=\left[\begin{matrix} y_1 \\y_2 \\z \end{matrix}\right])\\
-                                        &\iff(\exists y,z\ge 0:y^{T}A=z,y^{T}b<0) &(y=y_1-y_2) \\
-                                        &\iff(\exists y :y^{T}A\ge 0,y^{T}b<0)
+            (\neg \exists x\mathbf{x}\ge 0: \mathbf{A}\mathbf{x}= \mathbf{b})&\iff(\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b},-\mathbf{A}\mathbf{x}\le-\mathbf{b},-\mathbf{x}\le 0)\\
+                                        &\iff(\neg \exists \mathbf{x}: \mathbf{A}'\mathbf{x}\le \mathbf{b}') \\
+                                        &\iff(\exists \mathbf{y}'\ge 0 :\mathbf{y}'^{T}\mathbf{A}'=0,\mathbf{y}'^{T}\mathbf{b}'<0) &(\text{derived from} (1))\\
+                                        &\iff(\exists \mathbf{y}_1,\mathbf{y}_2,z\ge 0:(\mathbf{y}_{1}^{T}-\mathbf{y}_{2}^{T})\mathbf{A}-z=0,(\mathbf{y}_{1}^{T}-\mathbf{y}_{2}^{T})\mathbf{b}<0) &(\text{Let }\mathbf{y}'=\left[\begin{matrix} \mathbf{y}_1 \\\mathbf{y}_2 \\z \end{matrix}\right])\\
+                                        &\iff(\exists \mathbf{y},z\ge 0:\mathbf{y}^{T}\mathbf{A}=z,\mathbf{y}^{T}\mathbf{b}<0) &(\mathbf{y}=\mathbf{y}_1-\mathbf{y}_2) \\
+                                        &\iff(\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}^{T}\mathbf{b}<0)
         \end{align*}
 
         $(3)\Rightarrow(2)$:
 
-        let $A'=\left[
+        let $\mathbf{A}'=\left[
         \begin{matrix}
-            A & I
+            \mathbf{A} & I
         \end{matrix}
         \right]$.
         \begin{align*}
-            (\neg \exists x\ge 0: Ax\le b)&\iff (\neg \exists x,z\ge 0:Ax+z=b) &(Ax\le b \iff \exists z\ge 0,Ax+z=b)\\
-                                          &\iff (\neg \exists x'\ge 0:A'x'=b)  &(\text{let }x'=\left[ \begin{matrix} x \\ z\end{matrix} \right])\\
-                                          &\iff (\exists y :y^{T}A'\ge 0,y^{T}b<0) &(\text{derived from} (3)) \\
-                                          &\iff (\exists y :y^{T}A\ge 0,y\ge 0,y^{T}b<0) \\
-                                          &\iff (\exists y\ge 0 :y^{T}A\ge 0,y^{T}b<0) \\
+            (\neg \exists \mathbf{x}\ge 0: \mathbf{A}\mathbf{x}\le \mathbf{b})&\iff (\neg \exists \mathbf{x},z\ge 0:\mathbf{A}\mathbf{x}+z=\mathbf{b}) &(\mathbf{A}\mathbf{x}\le \mathbf{b} \iff \exists z\ge 0,\mathbf{A}\mathbf{x}+z=\mathbf{b})\\
+                                          &\iff (\neg \exists \mathbf{x}'\ge 0:\mathbf{A}'\mathbf{x}'=\mathbf{b})  &(\text{let }\mathbf{x}'=\left[ \begin{matrix} \mathbf{x} \\ z\end{matrix} \right])\\
+                                          &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}'\ge 0,\mathbf{y}^{T}\mathbf{b}<0) &(\text{derived from} (3)) \\
+                                          &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}\ge 0,\mathbf{y}^{T}\mathbf{b}<0) \\
+                                          &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}^{T}\mathbf{b}<0) \\
         \end{align*}
 
         $(2)\Rightarrow(1)$:
 
-        Let $A'=\left[
+        Let $\mathbf{A}'=\left[
         \begin{matrix}
-            A & -A
+            \mathbf{A} & -\mathbf{A}
         \end{matrix}
         \right]$.
         \begin{align*}
-            (\neg \exists x: Ax\le b) &\iff (\neg \exists x_1,x_2\ge 0: A(x_1-x_2)\le b) \\
-            &\iff (\neg \exists x'\ge 0: A'x'\le b) &(\text{let }x'=\left[ \begin{matrix}x_1 \\x_2  \end{matrix} \right])\\
-            &\iff (\exists y\ge 0 :y^{T}A'\ge 0,y^{T}b<0) &(\text{derived from} (2)) \\
-            &\iff (\exists y\ge 0 :y^{T}A\ge 0,-y^{T}A\ge 0,y^{T}b<0) \\
-            &\iff (\exists y\ge 0 :y^{T}A= 0,y^{T}b<0)
+            (\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\neg \exists \mathbf{x}_1,\mathbf{x}_2\ge 0: \mathbf{A}(\mathbf{x}_1-\mathbf{x}_2)\le \mathbf{b}) \\
+            &\iff (\neg \exists \mathbf{x}'\ge 0: \mathbf{A}'\mathbf{x}'\le \mathbf{b}) &(\text{let }\mathbf{x}'=\left[ \begin{matrix}\mathbf{x}_1 \\\mathbf{x}_2  \end{matrix} \right])\\
+            &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}'\ge 0,\mathbf{y}^{T}\mathbf{b}<0) &(\text{derived from} (2)) \\
+            &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}\ge 0,-\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}^{T}\mathbf{b}<0) \\
+            &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}= 0,\mathbf{y}^{T}\mathbf{b}<0)
         \end{align*}
     \end{proof}
 
