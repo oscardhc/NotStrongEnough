@@ -7,38 +7,44 @@
     \begin{proof}
         First, we write down MCF in terms of inequality: 
         \begin{align*}
-            minimize\ &\sum_{e\in E}c(e)f(e)\\
-            subject\ to\ &\sum_{e\in E:e=(u,t)}f(e)\geq 1 & \text{(corresponds to $y_t^+$ in dual form)}\\
+            {\rm minimize}\ &\sum_{e\in E}c(e)f(e)\\
+            {\rm subject\ to}\ &\sum_{e\in E:e=(u,t)}f(e)\geq 1 & \text{(corresponds to $y_t^+$ in dual form)}\\
                 &\sum_{e\in E:e=(u,t)}-f(e)\geq -1 & \text{(corresponds to $y_t^-$ in dual form)}\\
-                &\sum_{e\in E:e=(u,v)}f(e)-\sum_{e\in E:e=(v,w)}f(e)\geq 0,\forall v\in V\backslash\{s,t\} & \text{(corresponds to $y_v^+$ in dual form)}\\
-                &\sum_{e\in E:e=(v,w)}f(e)-\sum_{e\in E:e=(u,v)}f(e)\geq 0,\forall v\in V\backslash\{s,t\} & \text{(corresponds to $y_v^-$ in dual form)}\\
+                &\sum_{e\in E:e=(u,v)}f(e)-\sum_{e\in E:e=(v,w)}f(e)\geq 0,\forall v\in V\setminus\{s,t\} & \text{(corresponds to $y_v^+$ in dual form)}\\
+                &\sum_{e\in E:e=(v,w)}f(e)-\sum_{e\in E:e=(u,v)}f(e)\geq 0,\forall v\in V\setminus\{s,t\} & \text{(corresponds to $y_v^-$ in dual form)}\\
+                &f(e) \geq 0, \forall e \in E.
         \end{align*}
         Then write down its dual LP: (Let $S=\{e\in E:e=(s,v),v\in V\}$)
         \begin{align*}
-            maximize\ &y_t^+-y_t^-\\
-            subject\ to\ &(y_v^+-y_v^-)-(y_u^+-y_u^-)\leq c(e),\forall e=(u,v)\in E\backslash S\\
-                        &y_v^+-y_v^-\leq c(e),\forall e=(s,v)\in S
+            {\rm maximize}\ &y_t^+-y_t^-\\
+            {\rm subject\ to}\ &(y_v^+-y_v^-)-(y_u^+-y_u^-)\leq c(e),\forall e=(u,v)\in E\setminus S\\
+                        &y_v^+-y_v^-\leq c(e),\forall e=(s,v)\in S \\
+                        & y_v^+, y_v^- \geq 0, \forall v\in V\setminus\{s,t\} \\
+                        & y_t^+, y_t^- \geq 0.
         \end{align*}
         Now let $z_u=y_u^+-y_u^-$ for all vertices $u$, it turns to be: 
         \begin{align*}
-            maximize\ &z_t\\
-            subject\ to\ &z_v-z_u\leq c(e),\forall e=(u,v)\in E\backslash S\\
-                        &z_v\leq c(e),\forall e=(s,v)\in S
+            {\rm maximize}\ &z_t\\
+            {\rm subject\ to}\ &z_v-z_u\leq c(e),\forall e=(u,v)\in E\setminus S\\
+                        &z_v\leq c(e),\forall e=(s,v)\in S \\
+                        & z_v \in \mathbf{R}, \forall v v\in V\setminus\{s,t\} \\
+                        & z_t \in \mathbf{R}.
         \end{align*}
         Let $z_v'=z_v+z_s'$, for all vertices $u$ except for $s$ and the problem turns to: 
         \begin{align*}
-            maximize\ &z_t'-z_s'\\
-            subject\ to\ &z_v'-z_u'\leq c(e),\forall e=(u,v)\in E
+            {\rm maximize}\ &z_t'-z_s'\\
+            {\rm subject\ to}\ &z_v'-z_u'\leq c(e),\forall e=(u,v)\in E \\
+            & z_v' \in \mathbf{R}, \forall v \in V.
         \end{align*}
     \end{proof}
 
     \begin{thm}{}{}
-        Interpret the dual. Show that it is the LP formulation of a "natural" maximization problem on G
+        Interpret the dual. Show that it is the LP formulation of a ``natural'' maximization problem on G
     \end{thm}
 
     \begin{proof}[Solution]
         Consider that each vertex has a potential, and for each edge $e=(u,v)$, 
-        the potential of the terminal vertex $u$ is no greater than the potential of the start vertex $v$, 
+        the potential of the terminal vertex $v$ is no greater than the potential of the start vertex $u$ plus $c(u, v)$, 
         and our goal is to maximize the potential of $t$. 
     \end{proof}
 \end{document}
