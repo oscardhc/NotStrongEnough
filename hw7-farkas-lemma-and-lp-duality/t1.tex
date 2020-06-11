@@ -9,9 +9,9 @@
     \begin{thm}{}{}
         Show that the three versions of Farkas Lemma presented in class are all equivalent:
         \begin{align*}
-            (\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}=0,\mathbf{y}^{T}\mathbf{b}<0) &(1)\\
-            (\neg \exists \mathbf{x}\ge 0: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}^{T}\mathbf{b}<0) &(2)\\
-            (\neg \exists \mathbf{x}\ge 0: \mathbf{A}\mathbf{x}= \mathbf{b}) &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}^{T}\mathbf{b}<0)&(3)
+            (\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}=\mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) &(1)\\
+            (\neg \exists \mathbf{x}\ge \mathbf{0}: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) &(2)\\
+            (\neg \exists \mathbf{x}\ge \mathbf{0}: \mathbf{A}\mathbf{x}= \mathbf{b}) &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0)&(3)
         \end{align*}
     \end{thm}
     \begin{proof}
@@ -21,38 +21,38 @@
         \begin{matrix}
             \mathbf{A} \\
             -\mathbf{A} \\
-            -I
+            -\mathbf{I}
         \end{matrix}
         \right],
         \mathbf{b}'=\left[
         \begin{matrix}
             \mathbf{b} \\
             -\mathbf{b} \\
-            0
+            \mathbf{0}
         \end{matrix}
         \right]$.
         Then \begin{align*}
-            (\neg \exists \mathbf{x}\ge 0: \mathbf{A}\mathbf{x}= \mathbf{b})&\iff(\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b},-\mathbf{A}\mathbf{x}\le-\mathbf{b},-\mathbf{x}\le 0)\\
+            (\neg \exists \mathbf{x}\ge \mathbf{0}: \mathbf{A}\mathbf{x}= \mathbf{b})&\iff(\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b},-\mathbf{A}\mathbf{x}\le-\mathbf{b},-\mathbf{x}\le \mathbf{0})\\
                                         &\iff(\neg \exists \mathbf{x}: \mathbf{A}'\mathbf{x}\le \mathbf{b}') \\
-                                        &\iff(\exists \mathbf{y}'\ge 0 :\mathbf{y}'^{T}\mathbf{A}'=0,\mathbf{y}'^{T}\mathbf{b}'<0) &(\text{derived from} (1))\\
-                                        &\iff(\exists \mathbf{y}_1,\mathbf{y}_2,z\ge 0:(\mathbf{y}_{1}^{T}-\mathbf{y}_{2}^{T})\mathbf{A}-z=0,(\mathbf{y}_{1}^{T}-\mathbf{y}_{2}^{T})\mathbf{b}<0) &(\text{Let }\mathbf{y}'=\left[\begin{matrix} \mathbf{y}_1 \\\mathbf{y}_2 \\z \end{matrix}\right])\\
-                                        &\iff(\exists \mathbf{y},z\ge 0:\mathbf{y}^{T}\mathbf{A}=z,\mathbf{y}^{T}\mathbf{b}<0) &(\mathbf{y}=\mathbf{y}_1-\mathbf{y}_2) \\
-                                        &\iff(\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}^{T}\mathbf{b}<0)
+                                        &\iff(\exists \mathbf{y}'\ge \mathbf{0} :\mathbf{y}'^{T}\mathbf{A}'=\mathbf{0},\mathbf{y}'^{T}\mathbf{b}'<0) &(\text{derived from} (1))\\
+                                        &\iff(\exists \mathbf{y}_1,\mathbf{y}_2,\mathbf{z}\ge \mathbf{0}:(\mathbf{y}_{1}^{T}-\mathbf{y}_{2}^{T})\mathbf{A}-\mathbf{z}=\mathbf{0},(\mathbf{y}_{1}^{T}-\mathbf{y}_{2}^{T})\mathbf{b}<0) &(\text{Let }\mathbf{y}'=\left[\begin{matrix} \mathbf{y}_1 \\\mathbf{y}_2 \\\mathbf{z} \end{matrix}\right])\\
+                                        &\iff(\exists \mathbf{z}\ge \mathbf{0}, \mathbf{y}:\mathbf{y}^{T}\mathbf{A}=\mathbf{z},\mathbf{y}^{T}\mathbf{b}<0) &(\mathbf{y}=\mathbf{y}_1-\mathbf{y}_2) \\
+                                        &\iff(\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0)
         \end{align*}
 
         $(3)\Rightarrow(2)$:
 
         let $\mathbf{A}'=\left[
         \begin{matrix}
-            \mathbf{A} & I
+            \mathbf{A} & \mathbf{I}
         \end{matrix}
         \right]$.
         \begin{align*}
-            (\neg \exists \mathbf{x}\ge 0: \mathbf{A}\mathbf{x}\le \mathbf{b})&\iff (\neg \exists \mathbf{x},z\ge 0:\mathbf{A}\mathbf{x}+z=\mathbf{b}) &(\mathbf{A}\mathbf{x}\le \mathbf{b} \iff \exists z\ge 0,\mathbf{A}\mathbf{x}+z=\mathbf{b})\\
-                                          &\iff (\neg \exists \mathbf{x}'\ge 0:\mathbf{A}'\mathbf{x}'=\mathbf{b})  &(\text{let }\mathbf{x}'=\left[ \begin{matrix} \mathbf{x} \\ z\end{matrix} \right])\\
-                                          &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}'\ge 0,\mathbf{y}^{T}\mathbf{b}<0) &(\text{derived from} (3)) \\
-                                          &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}\ge 0,\mathbf{y}^{T}\mathbf{b}<0) \\
-                                          &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}^{T}\mathbf{b}<0) \\
+            (\neg \exists \mathbf{x}\ge \mathbf{0}: \mathbf{A}\mathbf{x}\le \mathbf{b})&\iff (\neg \exists \mathbf{x},\mathbf{z}\ge \mathbf{0}:\mathbf{A}\mathbf{x}+\mathbf{z}=\mathbf{b}) &(\mathbf{A}\mathbf{x}\le \mathbf{b} \iff \exists \mathbf{z}\ge \mathbf{0},\mathbf{A}\mathbf{x}+\mathbf{z}=\mathbf{b})\\
+                                          &\iff (\neg \exists \mathbf{x}'\ge \mathbf{0}:\mathbf{A}'\mathbf{x}'=\mathbf{b})  &(\text{let }\mathbf{x}'=\left[ \begin{matrix} \mathbf{x} \\ \mathbf{z}\end{matrix} \right])\\
+                                          &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}'\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) &(\text{derived from} (3)) \\
+                                          &\iff (\exists \mathbf{y} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) \\
+                                          &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) \\
         \end{align*}
 
         $(2)\Rightarrow(1)$:
@@ -63,11 +63,11 @@
         \end{matrix}
         \right]$.
         \begin{align*}
-            (\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\neg \exists \mathbf{x}_1,\mathbf{x}_2\ge 0: \mathbf{A}(\mathbf{x}_1-\mathbf{x}_2)\le \mathbf{b}) \\
-            &\iff (\neg \exists \mathbf{x}'\ge 0: \mathbf{A}'\mathbf{x}'\le \mathbf{b}) &(\text{let }\mathbf{x}'=\left[ \begin{matrix}\mathbf{x}_1 \\\mathbf{x}_2  \end{matrix} \right])\\
-            &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}'\ge 0,\mathbf{y}^{T}\mathbf{b}<0) &(\text{derived from} (2)) \\
-            &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}\ge 0,-\mathbf{y}^{T}\mathbf{A}\ge 0,\mathbf{y}^{T}\mathbf{b}<0) \\
-            &\iff (\exists \mathbf{y}\ge 0 :\mathbf{y}^{T}\mathbf{A}= 0,\mathbf{y}^{T}\mathbf{b}<0)
+            (\neg \exists \mathbf{x}: \mathbf{A}\mathbf{x}\le \mathbf{b}) &\iff (\neg \exists \mathbf{x}_1,\mathbf{x}_2\ge \mathbf{0}: \mathbf{A}(\mathbf{x}_1-\mathbf{x}_2)\le \mathbf{b}) \\
+            &\iff (\neg \exists \mathbf{x}'\ge \mathbf{0}: \mathbf{A}'\mathbf{x}'\le \mathbf{b}) &(\text{let }\mathbf{x}'=\left[ \begin{matrix}\mathbf{x}_1 \\\mathbf{x}_2  \end{matrix} \right])\\
+            &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}'\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) &(\text{derived from} (2)) \\
+            &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},-\mathbf{y}^{T}\mathbf{A}\ge \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0) \\
+            &\iff (\exists \mathbf{y}\ge \mathbf{0} :\mathbf{y}^{T}\mathbf{A}= \mathbf{0},\mathbf{y}^{T}\mathbf{b}<0)
         \end{align*}
     \end{proof}
 
